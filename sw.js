@@ -1,10 +1,8 @@
-const CACHE_NAME = 'smart-tashrifiy-v3';
+const CACHE_NAME = 'smart-tashrifiy-v4';
 const ASSETS = [
   './',
   './index.html',
-  './tasrifi_app.html',
   './manifest.json',
-  './logo.png',
   './icon-192.png',
   './icon-512.png'
 ];

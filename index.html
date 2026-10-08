@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>SMART TASHRIFIY v3 - Pembelajaran Shorof & Amtsilah At-Tashrifiyyah</title>
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#064e3b">
@@ -730,12 +730,19 @@
        COMPREHENSIVE MOBILE RESPONSIVENESS & ANTI-OVERLAP
        =================================================== */
     
+    html {
+      min-width: 320px;
+      scroll-padding-bottom: calc(78px + env(safe-area-inset-bottom));
+    }
+
     html, body {
-      overflow-x: hidden !important;
-      width: 100% !important;
-      max-width: 100vw !important;
+      width: 100%;
       margin: 0;
       padding: 0;
+    }
+
+    img, video, canvas, svg {
+      max-width: 100%;
     }
 
     * {
@@ -773,7 +780,7 @@
       margin: 0 auto !important;
     }
 
-    /* Smooth Swipeable Navigation Bar (Anti-Overlap) */
+    /* Adaptive navigation for desktop, tablet, and phone */
     .nav-tabs {
       display: flex !important;
       background: #ffffff !important;
@@ -811,6 +818,20 @@
       border-bottom-color: var(--primary) !important;
       background: #f0fdf4 !important;
     }
+    .nav-tab {
+      appearance: none !important;
+      font-family: inherit !important;
+      background: transparent !important;
+      border-top: 0 !important;
+      border-left: 0 !important;
+      border-right: 0 !important;
+    }
+    .nav-tab:focus-visible,
+    .flashcard-toggle:focus-visible {
+      outline: 3px solid #2563eb !important;
+      outline-offset: -3px !important;
+      z-index: 1;
+    }
 
     /* Container & Card Anti-Bleed */
     .container {
@@ -818,7 +839,7 @@
       max-width: 900px !important;
       margin: 0.75rem auto !important;
       padding: 0 0.65rem !important;
-      overflow-x: hidden !important;
+      overflow-x: visible !important;
     }
 
     .card {
@@ -830,7 +851,7 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.04) !important;
       width: 100% !important;
       max-width: 100% !important;
-      overflow-x: hidden !important;
+      overflow-x: visible !important;
     }
 
     /* Card Header Responsive Layout */
@@ -1001,6 +1022,33 @@
     .flashcard-answer.revealed {
       display: block !important;
     }
+    .flashcard-toggle {
+      display: block;
+      width: 100%;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+    .flashcard-question {
+      display: block;
+      text-align: center;
+      font-size: 1.45rem;
+      line-height: 1.8;
+      padding: 0.3rem;
+    }
+    .flashcard-answer[hidden] { display: none !important; }
+    .flashcard-answer:not([hidden]) { display: block !important; }
+    .flashcard-hint {
+      display: block;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-top: 0.4rem;
+    }
 
     /* Quiz Card on Mobile */
     .quiz-card {
@@ -1052,6 +1100,296 @@
       gap: 0.4rem !important;
     }
 
+    .nav-label-short { display: none; }
+
+    .arabic.ilal-example-list {
+      display: block;
+      line-height: 1.95;
+      overflow-wrap: anywhere;
+    }
+
+    .table-responsive,
+    .tashrif-table-wrap {
+      overscroll-behavior-x: contain;
+      scrollbar-color: #94a3b8 #f1f5f9;
+    }
+
+    .filter-btn,
+    .audio-btn,
+    .option-btn,
+    .btn-next,
+    #btn-install-app,
+    details.bina-accordion summary,
+    .flashcard-toggle {
+      min-height: 44px;
+    }
+
+    .mode-card[role="button"]:focus-visible {
+      outline: 3px solid #2563eb !important;
+      outline-offset: 2px !important;
+    }
+
+    .formula-steps,
+    .bina-grid,
+    .ilal-grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    }
+
+    @media (min-width: 761px) and (max-width: 960px) {
+      .nav-tabs {
+        display: grid !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        overflow: visible !important;
+      }
+
+      .nav-tab {
+        min-width: 0 !important;
+        justify-content: center !important;
+        padding: 0.65rem 0.4rem !important;
+        white-space: normal !important;
+      }
+
+      .nav-label-full { display: none; }
+      .nav-label-short { display: inline; }
+
+      .compare-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .mode-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding-bottom: calc(76px + env(safe-area-inset-bottom)) !important;
+      }
+
+      .nav-tabs {
+        position: fixed !important;
+        inset: auto 0 0 !important;
+        z-index: 1000 !important;
+        display: grid !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 2px;
+        width: 100% !important;
+        height: calc(68px + env(safe-area-inset-bottom));
+        padding: 4px 6px calc(4px + env(safe-area-inset-bottom));
+        overflow: visible !important;
+        white-space: normal !important;
+        border-top: 1px solid #dbe5df !important;
+        border-bottom: 0 !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        box-shadow: 0 -3px 12px rgba(6, 78, 59, 0.09) !important;
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+      }
+
+      .nav-tab {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        min-width: 0 !important;
+        min-height: 52px !important;
+        height: 100%;
+        gap: 1px !important;
+        padding: 4px 2px !important;
+        border: 0 !important;
+        border-radius: 7px !important;
+        font-size: 1.05rem !important;
+        line-height: 1.1 !important;
+        white-space: normal !important;
+      }
+
+      .nav-tab.active {
+        color: var(--primary-dark) !important;
+        background: #ecfdf5 !important;
+        box-shadow: inset 0 2px 0 var(--primary) !important;
+      }
+
+      .nav-tab span[aria-hidden="true"] {
+        font-size: 1.1rem;
+      }
+
+      .nav-label-full { display: none !important; }
+      .nav-label-short {
+        display: block !important;
+        font-size: 0.68rem !important;
+        font-weight: 700 !important;
+        line-height: 1.15 !important;
+        white-space: nowrap !important;
+      }
+
+      .container {
+        padding: 0 0.55rem !important;
+        margin: 0.65rem auto !important;
+      }
+
+      .card,
+      .filter-card {
+        padding: 0.8rem !important;
+        border-radius: 10px !important;
+      }
+
+      header {
+        padding: 0.8rem 0.65rem !important;
+      }
+
+      header img {
+        width: 58px !important;
+        height: 58px !important;
+      }
+
+      header h1 {
+        font-size: clamp(1.05rem, 5vw, 1.3rem) !important;
+        letter-spacing: 0.01em !important;
+      }
+
+      header p {
+        font-size: 0.76rem !important;
+      }
+
+      .card-header {
+        align-items: stretch !important;
+      }
+
+      .card-header > * {
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .card-title {
+        font-size: 0.96rem !important;
+      }
+
+      .formula-steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .bina-grid,
+      .ilal-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      #grade-filters {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.4rem !important;
+      }
+
+      #grade-filters .filter-btn {
+        width: 100%;
+        text-align: left !important;
+      }
+
+      #tab-murojaah .card > .btn-group {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .filter-btn {
+        padding: 0.5rem 0.6rem !important;
+        overflow-wrap: anywhere;
+      }
+
+      .mode-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0.45rem !important;
+      }
+
+      .mode-card {
+        min-width: 0;
+        min-height: 72px;
+      }
+
+      .ilal-card,
+      .faidah-container {
+        min-width: 0;
+        padding: 0.7rem !important;
+      }
+
+      .ilal-example-list {
+        font-size: 0.88rem !important;
+        line-height: 1.85;
+        overflow-wrap: anywhere;
+      }
+
+      .arabic {
+        max-width: 100%;
+        font-size: 1.35rem;
+        word-spacing: 1px !important;
+      }
+
+      .tashrif-chain,
+      .question-arabic {
+        padding: 0.55rem !important;
+      }
+
+      .compare-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+
+      .table-responsive,
+      .tashrif-table-wrap {
+        max-width: 100%;
+        margin-inline: 0;
+      }
+
+      .table-responsive .data-table,
+      .tashrif-table {
+        font-size: 0.76rem !important;
+      }
+
+      .audio-btn,
+      .option-btn,
+      .btn-next {
+        min-height: 44px !important;
+      }
+
+      details.bina-accordion summary {
+        align-items: flex-start !important;
+        min-height: 44px;
+        padding: 0.25rem 0;
+      }
+
+      .quiz-stats {
+        gap: 0.35rem;
+      }
+
+      .stat-label {
+        font-size: 0.62rem !important;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .container { padding-inline: 0.4rem !important; }
+      .card, .filter-card { padding: 0.7rem !important; }
+      .formula-steps, .mode-grid { grid-template-columns: minmax(0, 1fr) !important; }
+      .nav-tabs { padding-inline: 3px; gap: 1px; }
+      .nav-label-short { font-size: 0.63rem !important; }
+      .quiz-hero { padding: 0.85rem !important; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (hover: none) {
+      .nav-tab:active,
+      .filter-btn:active,
+      .audio-btn:active,
+      .option-btn:active {
+        filter: brightness(0.94);
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1074,29 +1412,29 @@
     </div>
   </header>
 
-  <div class="nav-tabs">
-    <div class="nav-tab active" id="tab-btn-explorer" onclick="switchMainTab('explorer', this)">
-      <span>📖</span>
-      <span>Tashrif Explorer</span>
-    </div>
-    <div class="nav-tab" id="tab-btn-murojaah" onclick="switchMainTab('murojaah', this)">
-      <span>🔄</span>
-      <span>Muroja'ah Mandiri</span>
-    </div>
-    <div class="nav-tab" id="tab-btn-quiz" onclick="switchMainTab('quiz', this)">
-      <span>🎯</span>
-      <span>Tashrif Challenge</span>
-    </div>
-    <div class="nav-tab" id="tab-btn-about" onclick="switchMainTab('about', this)">
-      <span>ℹ️</span>
-      <span>Panduan & Kurikulum</span>
-    </div>
+  <div class="nav-tabs" role="tablist" aria-label="Navigasi utama" onkeydown="handleMainTabKeydown(event)">
+    <button type="button" role="tab" aria-label="Tashrif Explorer" aria-selected="true" aria-controls="tab-explorer" tabindex="0" class="nav-tab active" id="tab-btn-explorer" onclick="switchMainTab('explorer', this)">
+      <span aria-hidden="true">📖</span>
+      <span class="nav-label-full">Tashrif Explorer</span><span class="nav-label-short" aria-hidden="true">Materi</span>
+    </button>
+    <button type="button" role="tab" aria-label="Muroja'ah Mandiri" aria-selected="false" aria-controls="tab-murojaah" tabindex="-1" class="nav-tab" id="tab-btn-murojaah" onclick="switchMainTab('murojaah', this)">
+      <span aria-hidden="true">🔄</span>
+      <span class="nav-label-full">Muroja'ah Mandiri</span><span class="nav-label-short" aria-hidden="true">Ulang</span>
+    </button>
+    <button type="button" role="tab" aria-label="Tashrif Challenge" aria-selected="false" aria-controls="tab-quiz" tabindex="-1" class="nav-tab" id="tab-btn-quiz" onclick="switchMainTab('quiz', this)">
+      <span aria-hidden="true">🎯</span>
+      <span class="nav-label-full">Tashrif Challenge</span><span class="nav-label-short" aria-hidden="true">Latihan</span>
+    </button>
+    <button type="button" role="tab" aria-label="Panduan & Kurikulum" aria-selected="false" aria-controls="tab-about" tabindex="-1" class="nav-tab" id="tab-btn-about" onclick="switchMainTab('about', this)">
+      <span aria-hidden="true">ℹ️</span>
+      <span class="nav-label-full">Panduan & Kurikulum</span><span class="nav-label-short" aria-hidden="true">Panduan</span>
+    </button>
   </div>
 
   <div class="container">
 
     <!-- TAB 1: EXPLORER -->
-    <div id="tab-explorer">
+    <div id="tab-explorer" role="tabpanel" aria-labelledby="tab-btn-explorer" tabindex="0" aria-hidden="false">
       <div class="filter-card">
         <div class="filter-title">Pilih Jenjang & Topik:</div>
         <div class="btn-group" id="grade-filters">
@@ -1111,7 +1449,7 @@
     </div>
 
     <!-- TAB 2: MUROJA'AH MANDIRI -->
-    <div id="tab-murojaah" class="hidden">
+    <div id="tab-murojaah" class="hidden" role="tabpanel" aria-labelledby="tab-btn-murojaah" tabindex="0" aria-hidden="true">
       <div class="card">
         <div class="card-header">
           <div>
@@ -1135,7 +1473,7 @@
           </div>
           <div style="display:flex; gap:0.4rem;">
             <button class="filter-btn" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="shuffleMurojaah()">🔀 Acak Kartu</button>
-            <button class="filter-btn" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="toggleAllMurojaah()">👁️ Buka/Tutup Semua</button>
+            <button class="filter-btn" id="btn-toggle-all-murojaah" style="padding:0.25rem 0.6rem; font-size:0.75rem;" onclick="toggleAllMurojaah()" aria-pressed="false">👁️ Buka Semua</button>
           </div>
         </div>
 
@@ -1144,7 +1482,7 @@
     </div>
 
     <!-- TAB 3: QUIZ -->
-    <div id="tab-quiz" class="hidden">
+    <div id="tab-quiz" class="hidden" role="tabpanel" aria-labelledby="tab-btn-quiz" tabindex="0" aria-hidden="true">
       <div class="quiz-hero">
         <h2>Tashrif Challenge: Asesmen Interaktif</h2>
         <p>Uji pemahaman wazan, shighah, 7 bina', faidah wazan, dan 19 kaidah i'lal</p>
@@ -1156,31 +1494,31 @@
       </div>
 
       <div class="mode-grid">
-        <div class="mode-card active" onclick="setQuizMode('bina', this)">
+        <div class="mode-card active" role="button" tabindex="0" aria-pressed="true" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="setQuizMode('bina', this)">
           <div class="mode-icon">🏛️</div>
           <div class="mode-name">Kls 7: Bina' & Mujarrad</div>
         </div>
-        <div class="mode-card" onclick="setQuizMode('faidah', this)">
+        <div class="mode-card" role="button" tabindex="0" aria-pressed="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="setQuizMode('faidah', this)">
           <div class="mode-icon">⚖️</div>
           <div class="mode-name">Kls 8: Faidah Mazid</div>
         </div>
-        <div class="mode-card" onclick="setQuizMode('ilal', this)">
+        <div class="mode-card" role="button" tabindex="0" aria-pressed="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="setQuizMode('ilal', this)">
           <div class="mode-icon">✨</div>
           <div class="mode-name">Kls 9: 19 I'lal & Dhomir</div>
         </div>
-        <div class="mode-card" onclick="setQuizMode('sambung', this)">
+        <div class="mode-card" role="button" tabindex="0" aria-pressed="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="setQuizMode('sambung', this)">
           <div class="mode-icon">🔗</div>
           <div class="mode-name">Sambung Rantai Tashrif</div>
         </div>
-        <div class="mode-card" onclick="setQuizMode('detektor', this)">
+        <div class="mode-card" role="button" tabindex="0" aria-pressed="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="setQuizMode('detektor', this)">
           <div class="mode-icon">🔍</div>
           <div class="mode-name">Detektor Shighah Cepat</div>
         </div>
-        <div class="mode-card" onclick="setQuizMode('bedah_ilal', this)">
+        <div class="mode-card" role="button" tabindex="0" aria-pressed="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="setQuizMode('bedah_ilal', this)">
           <div class="mode-icon">🔬</div>
           <div class="mode-name">Bedah Bentuk Ashal I'lal</div>
         </div>
-        <div class="mode-card" onclick="setQuizMode('tryout', this)" style="border: 2px solid var(--accent); background: #fffbeb;">
+        <div class="mode-card" role="button" tabindex="0" aria-pressed="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="setQuizMode('tryout', this)" style="border: 2px solid var(--accent); background: #fffbeb;">
           <div class="mode-icon">🏆</div>
           <div class="mode-name" style="color:#92400e; font-weight:700;">Try Out Akbar (Kls 7-9)</div>
         </div>
@@ -1212,7 +1550,7 @@
     </div>
 
     <!-- TAB 4: ABOUT & PANDUAN -->
-    <div id="tab-about" class="hidden">
+    <div id="tab-about" class="hidden" role="tabpanel" aria-labelledby="tab-btn-about" tabindex="0" aria-hidden="true">
       <div class="card">
         <div class="card-header">
           <div class="card-title">Struktur Kurikulum SMART TASHRIFIY v3 (MTs Plus Darul Falah)</div>
@@ -1236,7 +1574,7 @@
 
           <div style="background:#f8fafc; border-left:4px solid #4338ca; padding:0.75rem 1rem; border-radius:0 8px 8px 0; margin-bottom:1.25rem;">
             <div style="font-weight:700; color:#3730a3; margin-bottom:0.25rem;">📗 Jenjang Kelas IX:</div>
-            <strong>19 Kaidah I'lal Lengkap</strong> dari Kitab <em>Qawa'idul I'lal</em>, Tashrif Lughowi Fi'il Madhi & Mudhari' Manshub al-Muttashil dengan Nun Wiqayah, Tabel 14 Isim Dhomir (Mahal Rafa', Nashab, Jar), dan Tashrif Lughowi Isim Maf'ul.
+            <strong>19 Kaidah I'lal Lengkap</strong> dari Kitab <em>Qawa'idul I'lal</em>, bentuk Fi'il Madhi dan Mudhari' yang bersambung dengan dhamir objek, Nun Wiqayah, Tabel 14 Isim Dhomir (Mahal Rafa', Nashab, Jar), dan Tashrif Lughowi Isim Maf'ul.
           </div>
 
           <hr style="border:none; border-top:1px solid #e5e7eb; margin:1.25rem 0;">
@@ -1321,6 +1659,14 @@
           console.log('TTS error', e);
         }
       }
+    }
+
+    function tashrifWithMasdarMimi(tashrif, masdarMimi) {
+      if (!masdarMimi) return tashrif;
+      const marker = ' - فَهُوَ';
+      const markerIndex = tashrif.indexOf(marker);
+      if (markerIndex < 0) return tashrif;
+      return `${tashrif.slice(0, markerIndex)} - ${masdarMimi}${tashrif.slice(markerIndex)}`;
     }
 
 
@@ -1516,7 +1862,7 @@ const appData = {
       },
       grade8: {
         formulaSteps: [
-          { step: "1. Kupas Akar Kata", desc: "Tarik kata ke 3 huruf asal (Fa'-'Ain-Lam) untuk membedakan huruf asli dengan huruf ziyadah (tambahan)." },
+          { step: "1. Kupas Akar Kata", desc: "Tentukan 3 huruf asal (Fa'-'Ain-Lam) pada Tsulatsi atau 4 huruf asal (Fa'-'Ain-Lam-Ra') pada Ruba'i, lalu pisahkan huruf ziyadah (tambahan)." },
           { step: "2. Cocokkan Pola Wazan", desc: "Periksa apakah kata termasuk Tsulatsi Mazid (1, 2, atau 3 huruf) atau Ruba'i." },
           { step: "3. Cek Sifat Transitif", desc: "Uji apakah kata asalnya Fi'il Lazim (intransitif) atau Muta'addi (transitif yang membutuhkan objek)." },
           { step: "4. Tetapkan Faidah Makna", desc: "Tentukan makna tambahan yang muncul (At-Ta'diyah, At-Taktsir, Al-Muthawa'ah, Al-Musyarakah, dll)." }
@@ -1524,14 +1870,14 @@ const appData = {
         mazidChapters: [
           {
             kategori: "Tsulatsi Mazid bi Harfin (Tambahan 1 Huruf: Tasydid 'Ain)",
-            wazan: "فَعَّلَ - يُفَعِّلُ - تَفْعِيلًا وَتَفْعِلَةً وَتِفْعَالًا",
-            tashrifLengkap: "فَعَّلَ - يُفَعِّلُ - تَفْعِيْلًا وَتَفْعِلَةً وَتِفْعَالًا - فَهُوَ مُفَعِّلٌ وَذَاكَ مُفَعَّلٌ - فَعِّلْ - لَا تُفَعِّلْ - مُفَعَّلٌ - مُفَعَّلٌ",
+            wazan: "فَعَّلَ - يُفَعِّلُ - تَفْعِيْلًا - تَفْعِلَةً - تَفْعَالًا - تِفْعَالًا",
+            tashrifLengkap: "فَعَّلَ - يُفَعِّلُ - تَفْعِيْلًا - تَفْعِلَةً - تَفْعَالًا - تِفْعَالًا - مُفَعَّلًا - فَهُوَ - مُفَعِّلٌ - وَذَاكَ - مُفَعَّلٌ - فَعِّلْ - لَا تُفَعِّلْ - مُفَعَّلٌ - مُفَعَّلٌ",
             binaVariants: [
-              { bina: "Bina' Shahih (صَرَّفَ)", tashrif: "صَرَّفَ - يُصَرِّفُ - تَصْرِيْفًا - فَهُوَ مُصَرِّفٌ وَذَاكَ مُصَرَّفٌ - صَرِّفْ - لَا تُصَرِّفْ - مُصَرَّفٌ - مُصَرَّفٌ", arti: "Mentashrif / Mengubah bentuk" },
-              { bina: "Bina' Mitsal (وَقَّتَ)", tashrif: "وَقَّتَ - يُوَقِّتُ - تَوْقِيْتًا - فَهُوَ مُوَقِّتٌ وَذَاكَ مُوَقَّتٌ - وَقِّتْ - لَا تُوَقِّتْ - مُوَقَّتٌ - مُوَقَّتٌ", arti: "Menentukan waktu" },
-              { bina: "Bina' Ajwaf (قَوَّمَ)", tashrif: "قَوَّمَ - يُقَوِّمُ - تَقْوِيْمًا - فَهُوَ مُقَوِّمٌ وَذَاكَ مُقَوَّمٌ - قَوِّمْ - لَا تُقَوِّمْ - مُقَوَّمٌ - مُقَوَّمٌ", arti: "Meluruskan / Memperbaiki" },
-              { bina: "Bina' Naqish (زَكَّى)", tashrif: "زَكَّى - يُزَكِّي - تَزْكِيَةً - فَهُوَ مُزَكٍّ وَذَاكَ مُزَكًّى - زَكِّ - لَا تُزَكِّ - مُزَكًّى - مُزَكًّى", arti: "Menyucikan" },
-              { bina: "Bina' Mahmouz (هَنَّأَ)", tashrif: "هَنَّأَ - يُهَنِّئُ - تَهْنِئَةً - فَهُوَ مُهَنِّئٌ وَذَاكَ مُهَنَّأٌ - هَنِّئْ - لَا تُهَنِّئْ - مُهَنَّأٌ - مُهَنَّأٌ", arti: "Mengucapkan selamat" }
+              { bina: "Bina' Shahih (صَرَّفَ)", tashrif: "صَرَّفَ - يُصَرِّفُ - تَصْرِيْفًا - مُصَرَّفًا - فَهُوَ - مُصَرِّفٌ - وَذَاكَ - مُصَرَّفٌ - صَرِّفْ - لَا تُصَرِّفْ - مُصَرَّفٌ - مُصَرَّفٌ", arti: "Mentashrif / Mengubah bentuk" },
+              { bina: "Bina' Mitsal (وَقَّتَ)", tashrif: "وَقَّتَ - يُوَقِّتُ - تَوْقِيتًا - مُوَقَّتًا - فَهُوَ - مُوَقِّتٌ - وَذَاكَ - مُوَقَّتٌ - وَقِّتْ - لَا تُوَقِّتْ - مُوَقَّتٌ - مُوَقَّتٌ", arti: "Menentukan waktu" },
+              { bina: "Bina' Ajwaf (قَوَّمَ)", tashrif: "قَوَّمَ - يُقَوِّمُ - تَقْوِيْمًا - مُقَوَّمًا - فَهُوَ - مُقَوِّمٌ - وَذَاكَ - مُقَوَّمٌ - قَوِّمْ - لَا تُقَوِّمْ - مُقَوَّمٌ - مُقَوَّمٌ", arti: "Meluruskan / Memperbaiki" },
+              { bina: "Bina' Naqish (زَكَّى)", tashrif: "زَكَّى - يُزَكِّي - تَزْكِيَةً - مُزَكًّى - فَهُوَ - مُزَكٍّ - وَذَاكَ - مُزَكًّى - زَكِّ - لَا تُزَكِّ - مُزَكًّى - مُزَكًّى", arti: "Menyucikan" },
+              { bina: "Bina' Mahmouz (هَنَّأَ)", tashrif: "هَنَّأَ - يُهَنِّئُ - تَهْنِئَةً - تَهْنِيئًا - مُهَنَّأً - فَهُوَ - مُهَنِّئٌ - وَذَاكَ - مُهَنَّأٌ - هَنِّئْ - لَا تُهَنِّئْ - مُهَنَّأٌ - مُهَنَّأٌ", arti: "Mengucapkan selamat" }
             ],
             faidahList: [
               {
@@ -1580,13 +1926,13 @@ const appData = {
           },
           {
             kategori: "Tsulatsi Mazid bi Harfin (Tambahan 1 Huruf: Alif sesudah Fa')",
-            wazan: "فَاعَلَ - يُفَاعِلُ - مُفَاعَلَةً وَفِعَالًا وَفِيْعَالًا",
-            tashrifLengkap: "فَاعَلَ - يُفَاعِلُ - مُفَاعَلَةً وَفِعَالًا وَفِيْعَالًا - فَهُوَ مُفَاعِلٌ وَذَاكَ مُفَاعَلٌ - فَاعِلْ - لَا تُفَاعِلْ - مُفَاعَلٌ - مُفَاعَلٌ",
+            wazan: "فَاعَلَ - يُفَاعِلُ - مُفَاعَلَةً وَفِعَالًا وَفِيْعَالًا - مُفَاعَلًا",
+            tashrifLengkap: "فَاعَلَ - يُفَاعِلُ - مُفَاعَلَةً وَفِعَالًا وَفِيْعَالًا - مُفَاعَلًا - فَهُوَ مُفَاعِلٌ وَذَاكَ مُفَاعَلٌ - فَاعِلْ - لَا تُفَاعِلْ - مُفَاعَلٌ - مُفَاعَلٌ",
             binaVariants: [
-              { bina: "Bina' Shahih (قَاتَلَ)", tashrif: "قَاتَلَ - يُقَاتِلُ - مُقَاتَلَةً وَقِتَالًا - فَهُوَ مُقَاتِلٌ وَذَاكَ مُقَاتَلٌ - قَاتِلْ - لَا تُقَاتِلْ - مُقَاتَلٌ - مُقَاتَلٌ", arti: "Memerangi / Berperang saling berbalas" },
-              { bina: "Bina' Mitsal (وَاعَدَ)", tashrif: "وَاعَدَ - يُوَاعِدُ - مُوَاعَدَةً وَوِعَادًا - فَهُوَ مُوَاعِدٌ وَذَاكَ مُوَاعَدٌ - وَاعِدْ - لَا تُوَاعِدْ - مُوَاعَدٌ - مُوَاعَدٌ", arti: "Saling berjanji temu" },
-              { bina: "Bina' Ajwaf (جَاوَرَ)", tashrif: "جَاوَرَ - يُجَاوِرُ - مُجَاوَرَةً وَجِوَارًا - فَهُوَ مُجَاوِرٌ وَذَاكَ مُجَاوَرٌ - جَاوِرْ - لَا تُجَاوِرْ - مُجَاوَرٌ - مُجَاوَرٌ", arti: "Bertetangga saling berdampingan" },
-              { bina: "Bina' Naqish (نَادَى)", tashrif: "نَادَى - يُنَادِي - مُنَادَاةً وَنِدَاءً - فَهُوَ مُنَادٍ وَذَاكَ مُنَادًى - نَادِ - لَا تُنَادِ - مُنَادًى - مُنَادًى", arti: "Memanggil / Menyeru" }
+              { bina: "Bina' Shahih (قَاتَلَ)", tashrif: "قَاتَلَ - يُقَاتِلُ - مُقَاتَلَةً وَقِتَالًا - فَهُوَ مُقَاتِلٌ وَذَاكَ مُقَاتَلٌ - قَاتِلْ - لَا تُقَاتِلْ - مُقَاتَلٌ - مُقَاتَلٌ", masdarMimi: "مُقَاتَلًا", arti: "Memerangi / Berperang saling berbalas" },
+              { bina: "Bina' Mitsal (وَاعَدَ)", tashrif: "وَاعَدَ - يُوَاعِدُ - مُوَاعَدَةً وَوِعَادًا - فَهُوَ مُوَاعِدٌ وَذَاكَ مُوَاعَدٌ - وَاعِدْ - لَا تُوَاعِدْ - مُوَاعَدٌ - مُوَاعَدٌ", masdarMimi: "مُوَاعَدًا", arti: "Saling berjanji temu" },
+              { bina: "Bina' Ajwaf (جَاوَرَ)", tashrif: "جَاوَرَ - يُجَاوِرُ - مُجَاوَرَةً وَجِوَارًا - فَهُوَ مُجَاوِرٌ وَذَاكَ مُجَاوَرٌ - جَاوِرْ - لَا تُجَاوِرْ - مُجَاوَرٌ - مُجَاوَرٌ", masdarMimi: "مُجَاوَرًا", arti: "Bertetangga saling berdampingan" },
+              { bina: "Bina' Naqish (نَادَى)", tashrif: "نَادَى - يُنَادِي - مُنَادَاةً وَنِدَاءً - فَهُوَ مُنَادٍ وَذَاكَ مُنَادًى - نَادِ - لَا تُنَادِ - مُنَادًى - مُنَادًى", masdarMimi: "مُنَادًى", arti: "Memanggil / Menyeru" }
             ],
             faidahList: [
               {
@@ -1614,13 +1960,13 @@ const appData = {
           },
           {
             kategori: "Tsulatsi Mazid bi Harfin (Tambahan 1 Huruf: Hamzah Qatha' di Awal)",
-            wazan: "أَفْعَلَ - يُفْعِلُ - إِفْعَالًا",
-            tashrifLengkap: "أَفْعَلَ - يُفْعِلُ - إِفْعَالًا - فَهُوَ مُفْعِلٌ وَذَاكَ مُفْعَلٌ - أَفْعِلْ - لَا تُفْعِلْ - مُفْعَلٌ - مُفْعَلٌ",
+            wazan: "أَفْعَلَ - يُفْعِلُ - إِفْعَالًا - مُفْعَلًا",
+            tashrifLengkap: "أَفْعَلَ - يُفْعِلُ - إِفْعَالًا - مُفْعَلًا - فَهُوَ مُفْعِلٌ وَذَاكَ مُفْعَلٌ - أَفْعِلْ - لَا تُفْعِلْ - مُفْعَلٌ - مُفْعَلٌ",
             binaVariants: [
-              { bina: "Bina' Shahih (أَحْسَنَ)", tashrif: "أَحْسَنَ - يُحْسِنُ - إِحْسَانًا - فَهُوَ مُحْسِنٌ وَذَاكَ مُحْسَنٌ - أَحْسِنْ - لَا تُحْسِنْ - مُحْسَنٌ - مُحْسَنٌ", arti: "Berbuat baik" },
-              { bina: "Bina' Mitsal (أَوْقَدَ)", tashrif: "أَوْقَدَ - يُوقِدُ - إِيقَادًا - فَهُوَ مُوقِدٌ وَذَاكَ مُوقَدٌ - أَوْقِدْ - لَا تُوقِدْ - مُوقَدٌ - مُوقَدٌ", arti: "Menyalakan api" },
-              { bina: "Bina' Ajwaf (أَقَامَ)", tashrif: "أَقَامَ - يُقِيمُ - إِقَامَةً - فَهُوَ مُقِيمٌ وَذَاكَ مُقَامٌ - أَقِمْ - لَا تُقِمْ - مُقَامٌ - مُقَامٌ", arti: "Mendirikan / Menetap" },
-              { bina: "Bina' Naqish (أَعْطَى)", tashrif: "أَعْطَى - يُعْطِي - إِعْطَاءً - فَهُوَ مُعْطٍ وَذَاكَ مُعْطًى - أَعْطِ - لَا تُعْطِ - مُعْطًى - مُعْطًى", arti: "Memberi" }
+              { bina: "Bina' Shahih (أَحْسَنَ)", tashrif: "أَحْسَنَ - يُحْسِنُ - إِحْسَانًا - فَهُوَ مُحْسِنٌ وَذَاكَ مُحْسَنٌ - أَحْسِنْ - لَا تُحْسِنْ - مُحْسَنٌ - مُحْسَنٌ", masdarMimi: "مُحْسَنًا", arti: "Berbuat baik" },
+              { bina: "Bina' Mitsal (أَوْقَدَ)", tashrif: "أَوْقَدَ - يُوقِدُ - إِيقَادًا - فَهُوَ مُوقِدٌ وَذَاكَ مُوقَدٌ - أَوْقِدْ - لَا تُوقِدْ - مُوقَدٌ - مُوقَدٌ", masdarMimi: "مُوقَدًا", arti: "Menyalakan api" },
+              { bina: "Bina' Ajwaf (أَقَامَ)", tashrif: "أَقَامَ - يُقِيمُ - إِقَامَةً - فَهُوَ مُقِيمٌ وَذَاكَ مُقَامٌ - أَقِمْ - لَا تُقِمْ - مُقَامٌ - مُقَامٌ", masdarMimi: "مُقَامًا", arti: "Mendirikan / Menetap" },
+              { bina: "Bina' Naqish (أَعْطَى)", tashrif: "أَعْطَى - يُعْطِي - إِعْطَاءً - فَهُوَ مُعْطٍ وَذَاكَ مُعْطًى - أَعْطِ - لَا تُعْطِ - مُعْطًى - مُعْطًى", masdarMimi: "مُعْطًى", arti: "Memberi" }
             ],
             faidahList: [
               {
@@ -1648,12 +1994,12 @@ const appData = {
           },
           {
             kategori: "Tsulatsi Mazid bi Harfaini (Tambahan 2 Huruf: Ta' dan Tasydid 'Ain)",
-            wazan: "تَفَعَّلَ - يَتَفَعَّلُ - تَفَعُّلًا",
-            tashrifLengkap: "تَفَعَّلَ - يَتَفَعَّلُ - تَفَعُّلًا - فَهُوَ مُتَفَعِّلٌ وَذَاكَ مُتَفَعَّلٌ - تَفَعَّلْ - لَا تَتَفَعَّلْ - مُتَفَعَّلٌ - مُتَفَعَّلٌ",
+            wazan: "تَفَعَّلَ - يَتَفَعَّلُ - تَفَعُّلًا - مُتَفَعَّلًا",
+            tashrifLengkap: "تَفَعَّلَ - يَتَفَعَّلُ - تَفَعُّلًا - مُتَفَعَّلًا - فَهُوَ مُتَفَعِّلٌ وَذَاكَ مُتَفَعَّلٌ - تَفَعَّلْ - لَا تَتَفَعَّلْ - مُتَفَعَّلٌ - مُتَفَعَّلٌ",
             binaVariants: [
-              { bina: "Bina' Shahih (تَعَلَّمَ)", tashrif: "تَعَلَّمَ - يَتَعَلَّمُ - تَعَلُّمًا - فَهُوَ مُتَعَلِّمٌ وَذَاكَ مُتَعَلَّمٌ - تَعَلَّمْ - لَا تَتَعَلَّمْ - مُتَعَلَّمٌ", arti: "Belajar tekun" },
-              { bina: "Bina' Mitsal (تَوَكَّلَ)", tashrif: "تَوَكَّلَ - يَتَوَكَّلُ - تَوَكُّلًا - فَهُوَ مُتَوَكِّلٌ - تَوَكَّلْ - لَا تَتَوَكَّلْ - مُتَوَكَّلٌ", arti: "Bertawakkal" },
-              { bina: "Bina' Ajwaf (تَبَيَّنَ)", tashrif: "تَبَيَّنَ - يَتَبَيَّنُ - تَبَيُّنًا - فَهُوَ مُتَبَيِّنٌ - تَبَيَّنْ - لَا تَتَبَيَّنْ - مُتَبَيَّنٌ", arti: "Menjadi jelas" }
+              { bina: "Bina' Shahih (تَعَلَّمَ)", tashrif: "تَعَلَّمَ - يَتَعَلَّمُ - تَعَلُّمًا - فَهُوَ مُتَعَلِّمٌ وَذَاكَ مُتَعَلَّمٌ - تَعَلَّمْ - لَا تَتَعَلَّمْ - مُتَعَلَّمٌ - مُتَعَلَّمٌ", masdarMimi: "مُتَعَلَّمًا", arti: "Belajar tekun" },
+              { bina: "Bina' Mitsal (تَوَكَّلَ)", tashrif: "تَوَكَّلَ - يَتَوَكَّلُ - تَوَكُّلًا - فَهُوَ مُتَوَكِّلٌ وَذَاكَ مُتَوَكَّلٌ - تَوَكَّلْ - لَا تَتَوَكَّلْ - مُتَوَكَّلٌ - مُتَوَكَّلٌ", masdarMimi: "مُتَوَكَّلًا", arti: "Bertawakkal" },
+              { bina: "Bina' Ajwaf (تَبَيَّنَ)", tashrif: "تَبَيَّنَ - يَتَبَيَّنُ - تَبَيُّنًا - فَهُوَ مُتَبَيِّنٌ وَذَاكَ مُتَبَيَّنٌ - تَبَيَّنْ - لَا تَتَبَيَّنْ - مُتَبَيَّنٌ - مُتَبَيَّنٌ", masdarMimi: "مُتَبَيَّنًا", arti: "Menjadi jelas" }
             ],
             faidahList: [
               {
@@ -1681,12 +2027,12 @@ const appData = {
           },
           {
             kategori: "Tsulatsi Mazid bi Harfaini (Tambahan 2 Huruf: Ta' dan Alif)",
-            wazan: "تَفَاعَلَ - يَتَفَاعَلُ - تَفَاعُلًا",
-            tashrifLengkap: "تَفَاعَلَ - يَتَفَاعَلُ - تَفَاعُلًا - فَهُوَ مُتَفَاعِلٌ وَذَاكَ مُتَفَاعَلٌ - تَفَاعَلْ - لَا تَتَفَاعَلْ - مُتَفَاعَلٌ - مُتَفَاعَلٌ",
+            wazan: "تَفَاعَلَ - يَتَفَاعَلُ - تَفَاعُلًا - مُتَفَاعَلًا",
+            tashrifLengkap: "تَفَاعَلَ - يَتَفَاعَلُ - تَفَاعُلًا - مُتَفَاعَلًا - فَهُوَ مُتَفَاعِلٌ وَذَاكَ مُتَفَاعَلٌ - تَفَاعَلْ - لَا تَتَفَاعَلْ - مُتَفَاعَلٌ - مُتَفَاعَلٌ",
             binaVariants: [
-              { bina: "Bina' Shahih (تَبَاعَدَ)", tashrif: "تَبَاعَدَ - يَتَبَاعَدُ - تَبَاعُدًا - فَهُوَ مُتَبَاعِدٌ - تَبَاعَدْ - لَا تَتَبَاعَدْ - مُتَبَاعَدٌ", arti: "Saling menjauh" },
-              { bina: "Bina' Mitsal (تَوَافَقَ)", tashrif: "تَوَافَقَ - يَتَوَافَقُ - تَوَافُقًا - فَهُوَ مُتَوَافِقٌ - تَوَافَقْ - لَا تَتَوَافَقْ - مُتَوَافَقٌ", arti: "Saling sepakat" },
-              { bina: "Bina' Naqish (تَرَامَى)", tashrif: "تَرَامَى - يَتَرَامَى - تَرَامِيًا - فَهُوَ مُتَرَامٍ - تَرَامَ - لَا تَتَرَامَ - مُتَرَامًى", arti: "Saling melempar" }
+              { bina: "Bina' Shahih (تَبَاعَدَ)", tashrif: "تَبَاعَدَ - يَتَبَاعَدُ - تَبَاعُدًا - فَهُوَ مُتَبَاعِدٌ وَذَاكَ مُتَبَاعَدٌ - تَبَاعَدْ - لَا تَتَبَاعَدْ - مُتَبَاعَدٌ - مُتَبَاعَدٌ", masdarMimi: "مُتَبَاعَدًا", arti: "Saling menjauh" },
+              { bina: "Bina' Mitsal (تَوَافَقَ)", tashrif: "تَوَافَقَ - يَتَوَافَقُ - تَوَافُقًا - فَهُوَ مُتَوَافِقٌ وَذَاكَ مُتَوَافَقٌ - تَوَافَقْ - لَا تَتَوَافَقْ - مُتَوَافَقٌ - مُتَوَافَقٌ", masdarMimi: "مُتَوَافَقًا", arti: "Saling sepakat" },
+              { bina: "Bina' Naqish (تَرَامَى)", tashrif: "تَرَامَى - يَتَرَامَى - تَرَامِيًا - فَهُوَ مُتَرَامٍ وَذَاكَ مُتَرَامًى - تَرَامَ - لَا تَتَرَامَ - مُتَرَامًى - مُتَرَامًى", masdarMimi: "مُتَرَامًى", arti: "Saling melempar" }
             ],
             faidahList: [
               {
@@ -1707,12 +2053,12 @@ const appData = {
           },
           {
             kategori: "Tsulatsi Mazid bi Harfaini (Tambahan 2 Huruf: Hamzah Washal dan Ta')",
-            wazan: "اِفْتَعَلَ - يَفْتَعِلُ - اِفْتِعَالًا",
-            tashrifLengkap: "اِفْتَعَلَ - يَفْتَعِلُ - اِفْتِعَالًا - فَهُوَ مُفْتَعِلٌ وَذَاكَ مُفْتَعَلٌ - اِفْتَعِلْ - لَا تَفْتَعِلْ - مُفْتَعَلٌ - مُفْتَعَلٌ",
+            wazan: "اِفْتَعَلَ - يَفْتَعِلُ - اِفْتِعَالًا - مُفْتَعَلًا",
+            tashrifLengkap: "اِفْتَعَلَ - يَفْتَعِلُ - اِفْتِعَالًا - مُفْتَعَلًا - فَهُوَ مُفْتَعِلٌ وَذَاكَ مُفْتَعَلٌ - اِفْتَعِلْ - لَا تَفْتَعِلْ - مُفْتَعَلٌ - مُفْتَعَلٌ",
             binaVariants: [
-              { bina: "Bina' Shahih (اِجْتَمَعَ)", tashrif: "اِجْتَمَعَ - يَجْتَمِعُ - اِجْتِمَاعًا - فَهُوَ مُجْتَمِعٌ - اِجْتَمِعْ - لَا تَجْتَمِعْ - مُجْتَمَعٌ", arti: "Berkumpul" },
-              { bina: "Bina' Mitsal (اِتَّقَى, Asalnya اِوْتَقَى)", tashrif: "اِتَّقَى - يَتَّقِي - اِتِّقَاءً - فَهُوَ مُتَّقٍ وَذَاكَ مُتَّقًى - اِتَّقِ - لَا تَتَّقِ - مُتَّقًى", arti: "Bertaqwa / Memelihara diri" },
-              { bina: "Bina' Ajwaf (اِخْتَارَ, Asalnya اِخْتَيَرَ)", tashrif: "اِخْتَارَ - يَخْتَارُ - اِخْتِيَارًا - فَهُوَ مُخْتَارٌ وَذَاكَ مُخْتَارٌ - اِخْتَرْ - لَا تَخْتَرْ - مُخْتَارٌ", arti: "Memilih" }
+              { bina: "Bina' Shahih (اِجْتَمَعَ)", tashrif: "اِجْتَمَعَ - يَجْتَمِعُ - اِجْتِمَاعًا - فَهُوَ مُجْتَمِعٌ وَذَاكَ مُجْتَمَعٌ - اِجْتَمِعْ - لَا تَجْتَمِعْ - مُجْتَمَعٌ - مُجْتَمَعٌ", masdarMimi: "مُجْتَمَعًا", arti: "Berkumpul" },
+              { bina: "Bina' Mitsal (اِتَّقَى, Asalnya اِوْتَقَى)", tashrif: "اِتَّقَى - يَتَّقِي - اِتِّقَاءً - فَهُوَ مُتَّقٍ وَذَاكَ مُتَّقًى - اِتَّقِ - لَا تَتَّقِ - مُتَّقًى - مُتَّقًى", masdarMimi: "مُتَّقًى", arti: "Bertaqwa / Memelihara diri" },
+              { bina: "Bina' Ajwaf (اِخْتَارَ, Asalnya اِخْتَيَرَ)", tashrif: "اِخْتَارَ - يَخْتَارُ - اِخْتِيَارًا - فَهُوَ مُخْتَارٌ وَذَاكَ مُخْتَارٌ - اِخْتَرْ - لَا تَخْتَرْ - مُخْتَارٌ - مُخْتَارٌ", masdarMimi: "مُخْتَارًا", arti: "Memilih" }
             ],
             faidahList: [
               {
@@ -1733,12 +2079,12 @@ const appData = {
           },
           {
             kategori: "Tsulatsi Mazid bi Harfaini (Tambahan 2 Huruf: Hamzah Washal dan Nun)",
-            wazan: "اِنْفَعَلَ - يَنْفَعِلُ - اِنْفِعَالًا",
-            tashrifLengkap: "اِنْفَعَلَ - يَنْفَعِلُ - اِنْفِعَالًا - فَهُوَ مُنْفَعِلٌ - اِنْفَعِلْ - لَا تَنْفَعِلْ - مُنْفَعَلٌ - مُنْفَعَلٌ",
+            wazan: "اِنْفَعَلَ - يَنْفَعِلُ - اِنْفِعَالًا - مُنْفَعَلًا",
+            tashrifLengkap: "اِنْفَعَلَ - يَنْفَعِلُ - اِنْفِعَالًا - مُنْفَعَلًا - فَهُوَ مُنْفَعِلٌ - اِنْفَعِلْ - لَا تَنْفَعِلْ - مُنْفَعَلٌ - مُنْفَعَلٌ",
             binaVariants: [
-              { bina: "Bina' Shahih (اِنْكَسَرَ)", tashrif: "اِنْكَسَرَ - يَنْكَسِرُ - اِنْكِسَارًا - فَهُوَ مُنْكَسِرٌ - اِنْكَسِرْ - لَا تَنْكَسِرْ - مُنْكَسَرٌ", arti: "Menjadi pecah" },
-              { bina: "Bina' Ajwaf (اِنْقَادَ)", tashrif: "اِنْقَادَ - يَنْقَادُ - اِنْقِيَادًا - فَهُوَ مُنْقَادٌ - اِنْقَدْ - لَا تَنْقَدْ - مُنْقَادٌ", arti: "Menjadi tunduk / patuh" },
-              { bina: "Bina' Naqish (اِنْقَضَى)", tashrif: "اِنْقَضَى - يَنْقَضِي - اِنْقِضَاءً - فَهُوَ مُنْقَضٍ - اِنْقَضِ - لَا تَنْقَضِ - مُنْقَضًى", arti: "Menjadi tuntas / selesai" }
+              { bina: "Bina' Shahih (اِنْكَسَرَ)", tashrif: "اِنْكَسَرَ - يَنْكَسِرُ - اِنْكِسَارًا - فَهُوَ مُنْكَسِرٌ - اِنْكَسِرْ - لَا تَنْكَسِرْ - مُنْكَسَرٌ", masdarMimi: "مُنْكَسَرًا", arti: "Menjadi pecah" },
+              { bina: "Bina' Ajwaf (اِنْقَادَ)", tashrif: "اِنْقَادَ - يَنْقَادُ - اِنْقِيَادًا - فَهُوَ مُنْقَادٌ - اِنْقَدْ - لَا تَنْقَدْ - مُنْقَادٌ", masdarMimi: "مُنْقَادًا", arti: "Menjadi tunduk / patuh" },
+              { bina: "Bina' Naqish (اِنْقَضَى)", tashrif: "اِنْقَضَى - يَنْقَضِي - اِنْقِضَاءً - فَهُوَ مُنْقَضٍ - اِنْقَضِ - لَا تَنْقَضِ - مُنْقَضًى", masdarMimi: "مُنْقَضًى", arti: "Menjadi tuntas / selesai" }
             ],
             faidahList: [
               {
@@ -1752,11 +2098,11 @@ const appData = {
           },
           {
             kategori: "Tsulatsi Mazid bi Harfaini (Tambahan 2 Huruf: Hamzah Washal dan Tasydid Lam)",
-            wazan: "اِفْعَلَّ - يَفْعَلُّ - اِفْعِلَالًا",
-            tashrifLengkap: "اِفْعَلَّ - يَفْعَلُّ - اِفْعِلَالًا - فَهُوَ مُفْعَلٌّ - اِفْعَلَّ - لَا تَفْعَلَّ - مُفْعَلٌّ - مُفْعَلٌّ",
+            wazan: "اِفْعَلَّ - يَفْعَلُّ - اِفْعِلَالًا - مُفْعَلًّا",
+            tashrifLengkap: "اِفْعَلَّ - يَفْعَلُّ - اِفْعِلَالًا - مُفْعَلًّا - فَهُوَ مُفْعَلٌّ - اِفْعَلَّ - لَا تَفْعَلَّ - مُفْعَلٌّ - مُفْعَلٌّ",
             binaVariants: [
-              { bina: "Bina' Mudha'af Warna (اِحْمَرَّ)", tashrif: "اِحْمَرَّ - يَحْمَرُّ - اِحْمِرَارًا - فَهُوَ مُحْمَرٌّ - اِحْمَرَّ - لَا تَحْمَرَّ - مُحْمَرٌّ", arti: "Sangat merah pekat" },
-              { bina: "Bina' Mudha'af Cacat (اِعْوَرَّ)", tashrif: "اِعْوَرَّ - يَعْوَرُّ - اِعْوِرَارًا - فَهُوَ مُعْوَرٌّ - اِعْوَرَّ - لَا تَعْوَرَّ - مُعْوَرٌّ", arti: "Sangat juling matanya" }
+              { bina: "Bina' Mudha'af Warna (اِحْمَرَّ)", tashrif: "اِحْمَرَّ - يَحْمَرُّ - اِحْمِرَارًا - فَهُوَ مُحْمَرٌّ - اِحْمَرَّ - لَا تَحْمَرَّ - مُحْمَرٌّ", masdarMimi: "مُحْمَرًّا", arti: "Sangat merah pekat" },
+              { bina: "Bina' Mudha'af Cacat (اِعْوَرَّ)", tashrif: "اِعْوَرَّ - يَعْوَرُّ - اِعْوِرَارًا - فَهُوَ مُعْوَرٌّ - اِعْوَرَّ - لَا تَعْوَرَّ - مُعْوَرٌّ", masdarMimi: "مُعْوَرًّا", arti: "Sangat juling matanya" }
             ],
             faidahList: [
               {
@@ -1770,12 +2116,12 @@ const appData = {
           },
           {
             kategori: "Tsulatsi Mazid bi Tsalatsati Ahruf (Tambahan 3 Huruf: Hamzah, Sin, Ta')",
-            wazan: "اِسْتَفْعَلَ - يَسْتَفْعِلُ - اِسْتِفْعَالًا",
-            tashrifLengkap: "اِسْتَفْعَلَ - يَسْتَفْعِلُ - اِسْتِفْعَالًا - فَهُوَ مُسْتَفْعِلٌ وَذَاكَ مُسْتَفْعَلٌ - اِسْتَفْعِلْ - لَا تَسْتَفْعِلْ - مُسْتَفْعَلٌ - مُسْتَفْعَلٌ",
+            wazan: "اِسْتَفْعَلَ - يَسْتَفْعِلُ - اِسْتِفْعَالًا - مُسْتَفْعَلًا",
+            tashrifLengkap: "اِسْتَفْعَلَ - يَسْتَفْعِلُ - اِسْتِفْعَالًا - مُسْتَفْعَلًا - فَهُوَ مُسْتَفْعِلٌ وَذَاكَ مُسْتَفْعَلٌ - اِسْتَفْعِلْ - لَا تَسْتَفْعِلْ - مُسْتَفْعَلٌ - مُسْتَفْعَلٌ",
             binaVariants: [
-              { bina: "Bina' Shahih (اِسْتَغْفَرَ)", tashrif: "اِسْتَغْفَرَ - يَسْتَغْفِرُ - اِسْتِغْفَارًا - فَهُوَ مُسْتَغْفِرٌ وَذَاكَ مُسْتَغْفَرٌ - اِسْتَغْفِرْ - لَا تَسْتَغْفِرْ - مُسْتَغْفَرٌ", arti: "Memohon ampunan" },
-              { bina: "Bina' Ajwaf (اِسْتَقَامَ)", tashrif: "اِسْتَقَامَ - يَسْتَقِيمُ - اِسْتِقَامَةً - فَهُوَ مُسْتَقِيمٌ - اِسْتَقِمْ - لَا تَسْتَقِمْ - مُسْتَقَامٌ", arti: "Istiqamah / Lurus" },
-              { bina: "Bina' Naqish (اِسْتَدْعَى)", tashrif: "اِسْتَدْعَى - يَسْتَدْعِي - اِسْتِدْعَاءً - فَهُوَ مُسْتَدْعٍ وَذَاكَ مُسْتَدْعًى - اِسْتَدْعِ - لَا تَسْتَدْعِ - مُسْتَدْعًى", arti: "Memanggil / Menuntut" }
+              { bina: "Bina' Shahih (اِسْتَغْفَرَ)", tashrif: "اِسْتَغْفَرَ - يَسْتَغْفِرُ - اِسْتِغْفَارًا - فَهُوَ مُسْتَغْفِرٌ وَذَاكَ مُسْتَغْفَرٌ - اِسْتَغْفِرْ - لَا تَسْتَغْفِرْ - مُسْتَغْفَرٌ", masdarMimi: "مُسْتَغْفَرًا", arti: "Memohon ampunan" },
+              { bina: "Bina' Ajwaf (اِسْتَقَامَ)", tashrif: "اِسْتَقَامَ - يَسْتَقِيمُ - اِسْتِقَامَةً - فَهُوَ مُسْتَقِيمٌ - اِسْتَقِمْ - لَا تَسْتَقِمْ - مُسْتَقَامٌ", masdarMimi: "مُسْتَقَامًا", arti: "Istiqamah / Lurus" },
+              { bina: "Bina' Naqish (اِسْتَدْعَى)", tashrif: "اِسْتَدْعَى - يَسْتَدْعِي - اِسْتِدْعَاءً - فَهُوَ مُسْتَدْعٍ وَذَاكَ مُسْتَدْعًى - اِسْتَدْعِ - لَا تَسْتَدْعِ - مُسْتَدْعًى", masdarMimi: "مُسْتَدْعًى", arti: "Memanggil / Menuntut" }
             ],
             faidahList: [
               {
@@ -1803,11 +2149,11 @@ const appData = {
           },
           {
             kategori: "Ruba'i Mujarrad & Mazid",
-            wazan: "فَعْلَلَ - يُفَعْلِلُ - فَعْلَلَةً وَفِعْلَالًا",
-            tashrifLengkap: "فَعْلَلَ - يُفَعْلِلُ - فَعْلَلَةً وَفِعْلَالًا - فَهُوَ مُفَعْلِلٌ وَذَاكَ مُفَعْلَلٌ - فَعْلِلْ - لَا تُفَعْلِلْ - مُفَعْلَلٌ - مُفَعْلَلٌ",
+            wazan: "فَعْلَلَ - يُفَعْلِلُ - فَعْلَلَةً وَفِعْلَالًا - مُفَعْلَلًا",
+            tashrifLengkap: "فَعْلَلَ - يُفَعْلِلُ - فَعْلَلَةً وَفِعْلَالًا - مُفَعْلَلًا - فَهُوَ مُفَعْلِلٌ وَذَاكَ مُفَعْلَلٌ - فَعْلِلْ - لَا تُفَعْلِلْ - مُفَعْلَلٌ - مُفَعْلَلٌ",
             binaVariants: [
-              { bina: "Ruba'i Shahih (دَحْرَجَ)", tashrif: "دَحْرَجَ - يُدَحْرِجُ - دَحْرَجَةً - فَهُوَ مُدَحْرِجٌ وَذَاكَ مُدَحْرَجٌ - دَحْرِجْ - لَا تُدَحْرِجْ - مُدَحْرَجٌ", arti: "Menggelindingkan" },
-              { bina: "Ruba'i Mudha'af (زَلْزَلَ)", tashrif: "زَلْزَلَ - يُزَلْزِلُ - زَلْزَلَةً وَزِلْزَالًا - فَهُوَ مُزَلْزِلٌ وَذَاكَ مُزَلْزَلٌ - زَلْزِلْ - لَا تُزَلْزِلْ - مُزَلْزَلٌ", arti: "Menggoncangkan" }
+              { bina: "Ruba'i Shahih (دَحْرَجَ)", tashrif: "دَحْرَجَ - يُدَحْرِجُ - دَحْرَجَةً - فَهُوَ مُدَحْرِجٌ وَذَاكَ مُدَحْرَجٌ - دَحْرِجْ - لَا تُدَحْرِجْ - مُدَحْرَجٌ", masdarMimi: "مُدَحْرَجًا", arti: "Menggelindingkan" },
+              { bina: "Ruba'i Mudha'af (زَلْزَلَ)", tashrif: "زَلْزَلَ - يُزَلْزِلُ - زَلْزَلَةً وَزِلْزَالًا - فَهُوَ مُزَلْزِلٌ وَذَاكَ مُزَلْزَلٌ - زَلْزِلْ - لَا تُزَلْزِلْ - مُزَلْزَلٌ", masdarMimi: "مُزَلْزَلًا", arti: "Menggoncangkan" }
             ],
             faidahList: [
               {
@@ -2086,7 +2432,7 @@ const appData = {
                 <div class="bina-title"><span>${b.name}</span></div>
                 <div class="bina-desc">${b.desc}</div>
                 <div class="bina-desc" style="color:#047857; font-weight:600;">🔍 Ciri: ${b.ciri}</div>
-                <div class="bina-example arabic">${b.ar}</div>
+                <div class="bina-example arabic">${b.ar.replace(/\s*\/\s*/g, '<br>')}</div>
               </div>
             `).join('')}
           </div>
@@ -2217,16 +2563,19 @@ const appData = {
                     <span style="font-size:0.75rem; color:#64748b;">▼ Buka Variasi Bina'</span>
                   </summary>
                   <div style="margin-top:0.75rem; display:flex; flex-direction:column; gap:0.6rem;">
-                    ${ch.binaVariants.map(v => `
-                      <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:0.65rem 0.85rem;">
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                          <strong style="color:var(--primary-dark); font-size:0.85rem;">${v.bina}</strong>
-                          <span style="font-size:0.78rem; color:#047857; font-weight:600;">Arti: ${v.arti}</span>
+                    ${ch.binaVariants.map(v => {
+                      const tashrifDisplay = tashrifWithMasdarMimi(v.tashrif, v.masdarMimi);
+                      return `
+                        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:0.65rem 0.85rem;">
+                          <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <strong style="color:var(--primary-dark); font-size:0.85rem;">${v.bina}</strong>
+                            <span style="font-size:0.78rem; color:#047857; font-weight:600;">Arti: ${v.arti}</span>
+                          </div>
+                          <div class="arabic" style="font-size:1.2rem; color:#1e293b; margin:0.35rem 0; line-height:2.2;">${tashrifDisplay}</div>
+                          <button class="audio-btn" style="font-size:0.75rem;" onclick="speakArabic('${tashrifDisplay}')">🔊 Dengar</button>
                         </div>
-                        <div class="arabic" style="font-size:1.2rem; color:#1e293b; margin:0.35rem 0; line-height:2.2;">${v.tashrif}</div>
-                        <button class="audio-btn" style="font-size:0.75rem;" onclick="speakArabic('${v.tashrif}')">🔊 Dengar</button>
-                      </div>
-                    `).join('')}
+                      `;
+                    }).join('')}
                   </div>
                 </details>
 
@@ -2284,7 +2633,7 @@ const appData = {
                 <div class="ilal-rule">${il.rule}</div>
                 <div class="ilal-detail">${il.detail}</div>
                 <div style="margin-top:0.45rem; padding:0.35rem 0.5rem; background:#ffffff; border:1px dashed #cbd5e1; border-radius:6px; font-size:0.82rem; color:var(--primary-dark);">
-                  <strong>Contoh:</strong> <span class="arabic" style="font-size:1.1rem; color:#1d4ed8;">${il.contoh}</span>
+                  <strong>Contoh:</strong> <span class="arabic ilal-example-list" style="font-size:1.1rem; color:#1d4ed8;">${il.contoh.replace(/,\s*/g, '<br>')}</span>
                 </div>
               </div>
             `).join('')}
@@ -2350,8 +2699,8 @@ const appData = {
             <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:10px; padding:1.2rem; margin-bottom:1.5rem; box-shadow:0 1px 3px rgba(0,0,0,0.05);">
               <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
                 <div>
-                  <h4 style="color:var(--primary-dark); font-size:1rem; font-weight:700;">2. Fi'il Madhi & Mudhari' Manshub al-Muttashil (Kajian Ilmiah Nun Wiqayah)</h4>
-                  <div style="font-size:0.82rem; color:#047857; font-weight:600;">Rahasia perlindungan harakat fi'il saat bersambung dengan Objek Ya' Mutakallim</div>
+                  <h4 style="color:var(--primary-dark); font-size:1rem; font-weight:700;">2. Fi'il Madhi & Mudhari' yang Bersambung dengan Dhamir Objek</h4>
+                  <div style="font-size:0.82rem; color:#047857; font-weight:600;">Contoh mudhari' di tabel ber-i'rab marfu' ketika tidak didahului nashib atau jazim; dhamir objek berada pada mahal nashab.</div>
                 </div>
                 <span class="formula-badge">نُوْنُ الوِقَايَةِ</span>
               </div>
@@ -2367,8 +2716,8 @@ const appData = {
                   <thead>
                     <tr>
                       <th>Dhomir Objek (Maf'ul)</th>
-                      <th>Fi'il Madhi Manshub</th>
-                      <th>Fi'il Mudhari' Manshub</th>
+                      <th>Fi'il Madhi + Dhamir Objek</th>
+                      <th>Fi'il Mudhari' Marfu' + Dhamir Objek</th>
                       <th>Arti Terjemahan Santri</th>
                       <th style="text-align:center;">Audio</th>
                     </tr>
@@ -2447,29 +2796,48 @@ const appData = {
 
 
     // Navigation & Grade Filtering Controllers
-    function switchMainTab(tabName, btnElement) {
-      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-      if (btnElement) {
-        btnElement.classList.add('active');
-      } else {
-        const targetBtn = document.getElementById(`tab-btn-${tabName}`);
-        if (targetBtn) targetBtn.classList.add('active');
-      }
+    function switchMainTab(tabName, btnElement, shouldScroll = true) {
+      const tabs = [...document.querySelectorAll('.nav-tab[role="tab"]')];
+      const targetBtn = btnElement || document.getElementById(`tab-btn-${tabName}`);
+      if (!targetBtn || !targetBtn.matches('[role="tab"]')) return;
 
-      document.getElementById('tab-explorer').classList.add('hidden');
-      document.getElementById('tab-murojaah').classList.add('hidden');
-      document.getElementById('tab-quiz').classList.add('hidden');
-      document.getElementById('tab-about').classList.add('hidden');
+      tabs.forEach(tab => {
+        const selected = tab === targetBtn;
+        tab.classList.toggle('active', selected);
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+      });
 
-      const targetDiv = document.getElementById(`tab-${tabName}`);
-      if (targetDiv) targetDiv.classList.remove('hidden');
+      document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
+        const selected = panel.id === targetBtn.getAttribute('aria-controls');
+        panel.classList.toggle('hidden', !selected);
+        panel.setAttribute('aria-hidden', String(!selected));
+      });
 
       // Scroll to top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (shouldScroll) window.scrollTo({ top: 0, behavior: 'smooth' });
 
       if (tabName === 'murojaah') {
         renderMurojaah(currentMurojaahTopic);
       }
+    }
+
+    function handleMainTabKeydown(event) {
+      const tabs = [...document.querySelectorAll('.nav-tab[role="tab"]')];
+      const currentIndex = tabs.indexOf(event.target);
+      if (currentIndex < 0) return;
+
+      let nextIndex;
+      if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+      else if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+      else if (event.key === 'Home') nextIndex = 0;
+      else if (event.key === 'End') nextIndex = tabs.length - 1;
+      else return;
+
+      event.preventDefault();
+      const nextTab = tabs[nextIndex];
+      switchMainTab(nextTab.id.replace('tab-btn-', ''), nextTab, false);
+      nextTab.focus();
     }
 
     function filterGrade(grade, btnElement) {
@@ -2502,27 +2870,72 @@ const appData = {
       container.innerHTML = '';
 
       list.forEach((item, idx) => {
-        const card = document.createElement('div');
+        const card = document.createElement('article');
         card.className = 'flashcard';
-        card.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
-            <span class="flashcard-badge">#${idx + 1} • ${item.q}</span>
-            <button class="audio-btn" style="padding:0.2rem 0.45rem; font-size:0.75rem;" onclick="event.stopPropagation(); speakArabic('${item.word}')">🔊</button>
-          </div>
-          <div class="flashcard-question arabic">${item.word}</div>
-          <div class="flashcard-answer ${isAllRevealed ? 'revealed' : ''}">
-            <div style="font-size:0.88rem; color:#065f46; font-weight:600; line-height:1.5;">${item.a}</div>
-          </div>
-          <div style="text-align:center; font-size:0.75rem; color:#94a3b8; margin-top:0.4rem;">
-            ${isAllRevealed ? '✓ Kunci Terbuka' : '👆 Ketuk untuk Buka / Tutup Kunci'}
-          </div>
-        `;
-        card.onclick = () => {
-          const ans = card.querySelector('.flashcard-answer');
-          ans.classList.toggle('revealed');
-        };
+
+        const header = document.createElement('div');
+        header.style.cssText = 'display:flex; justify-content:space-between; align-items:center; gap:0.5rem; margin-bottom:0.4rem;';
+        const badge = document.createElement('span');
+        badge.className = 'flashcard-badge';
+        badge.textContent = `#${idx + 1} • ${item.q}`;
+        const audioButton = document.createElement('button');
+        audioButton.type = 'button';
+        audioButton.className = 'audio-btn';
+        audioButton.style.cssText = 'padding:0.2rem 0.45rem; font-size:0.75rem; flex:0 0 auto;';
+        audioButton.setAttribute('aria-label', `Dengarkan: ${item.q}`);
+        audioButton.textContent = '🔊';
+        audioButton.addEventListener('click', () => speakArabic(item.word));
+        header.append(badge, audioButton);
+
+        const toggle = document.createElement('button');
+        toggle.type = 'button';
+        toggle.className = 'flashcard-toggle';
+        toggle.setAttribute('aria-expanded', String(isAllRevealed));
+        toggle.setAttribute('aria-controls', `murojaah-answer-${idx}`);
+
+        const question = document.createElement('span');
+        question.className = 'flashcard-question arabic';
+        question.textContent = item.word;
+        const answer = document.createElement('span');
+        answer.className = 'flashcard-answer';
+        answer.id = `murojaah-answer-${idx}`;
+        answer.hidden = !isAllRevealed;
+        const answerText = document.createElement('span');
+        answerText.style.cssText = 'display:block; font-size:0.88rem; color:#065f46; font-weight:600; line-height:1.5;';
+        answerText.textContent = item.a;
+        answer.appendChild(answerText);
+
+        const hint = document.createElement('span');
+        hint.className = 'flashcard-hint';
+        hint.textContent = isAllRevealed ? '✓ Kunci Terbuka' : '👆 Ketuk untuk Buka Kunci';
+        toggle.append(question, answer, hint);
+        toggle.addEventListener('click', () => toggleMurojaahCard(toggle));
+
+        card.append(header, toggle);
         container.appendChild(card);
       });
+      syncMurojaahBulkControl();
+    }
+
+    function toggleMurojaahCard(toggle) {
+      const answer = document.getElementById(toggle.getAttribute('aria-controls'));
+      if (!answer) return;
+      answer.hidden = !answer.hidden;
+      const revealed = !answer.hidden;
+      toggle.setAttribute('aria-expanded', String(revealed));
+      toggle.querySelector('.flashcard-hint').textContent = revealed
+        ? '✓ Kunci Terbuka • Ketuk untuk Tutup'
+        : '👆 Ketuk untuk Buka Kunci';
+      const answers = [...document.querySelectorAll('#murojaah-container .flashcard-answer')];
+      isAllRevealed = answers.length > 0 && answers.every(cardAnswer => !cardAnswer.hidden);
+      syncMurojaahBulkControl();
+    }
+
+    function syncMurojaahBulkControl() {
+      const button = document.getElementById('btn-toggle-all-murojaah');
+      if (!button) return;
+      button.setAttribute('aria-pressed', String(isAllRevealed));
+      button.textContent = isAllRevealed ? '👁️ Tutup Semua' : '👁️ Buka Semua';
     }
 
     function shuffleMurojaah() {
@@ -2532,10 +2945,16 @@ const appData = {
 
     function toggleAllMurojaah() {
       isAllRevealed = !isAllRevealed;
-      document.querySelectorAll('.flashcard-answer').forEach(ans => {
-        if (isAllRevealed) ans.classList.add('revealed');
-        else ans.classList.remove('revealed');
+      document.querySelectorAll('#murojaah-container .flashcard-toggle').forEach(toggle => {
+        const answer = document.getElementById(toggle.getAttribute('aria-controls'));
+        if (!answer) return;
+        answer.hidden = !isAllRevealed;
+        toggle.setAttribute('aria-expanded', String(isAllRevealed));
+        toggle.querySelector('.flashcard-hint').textContent = isAllRevealed
+          ? '✓ Kunci Terbuka • Ketuk untuk Tutup'
+          : '👆 Ketuk untuk Buka Kunci';
       });
+      syncMurojaahBulkControl();
     }
 
     // QUIZ GAME ENGINE
@@ -2558,8 +2977,14 @@ const appData = {
 
     function setQuizMode(m, cardElement) {
       currentMode = m;
-      document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
-      if (cardElement) cardElement.classList.add('active');
+      document.querySelectorAll('.mode-card').forEach(c => {
+        c.classList.remove('active');
+        c.setAttribute('aria-pressed', 'false');
+      });
+      if (cardElement) {
+        cardElement.classList.add('active');
+        cardElement.setAttribute('aria-pressed', 'true');
+      }
       restartQuiz();
     }
 
