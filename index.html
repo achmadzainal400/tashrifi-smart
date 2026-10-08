@@ -9,6 +9,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #065f46;
@@ -722,6 +725,333 @@
       color: var(--primary-light);
     }
 
+  
+    /* ===================================================
+       COMPREHENSIVE MOBILE RESPONSIVENESS & ANTI-OVERLAP
+       =================================================== */
+    
+    html, body {
+      overflow-x: hidden !important;
+      width: 100% !important;
+      max-width: 100vw !important;
+      margin: 0;
+      padding: 0;
+    }
+
+    * {
+      box-sizing: border-box !important;
+    }
+
+    /* Arabic Typography: Generous Line-Height to Prevent Harakat Collision */
+    .arabic {
+      font-family: 'Amiri', 'Scheherazade New', 'Traditional Arabic', serif !important;
+      direction: rtl !important;
+      line-height: 2.3 !important;
+      word-spacing: 2px !important;
+      overflow-wrap: break-word !important;
+      word-break: break-word !important;
+    }
+
+    /* Header & Logo Mobile Polish */
+    header {
+      padding: 1rem 0.75rem !important;
+      position: relative !important;
+      width: 100% !important;
+    }
+
+    header h1 {
+      font-size: 1.4rem !important;
+      line-height: 1.25 !important;
+      margin: 0.25rem 0 0.15rem 0 !important;
+      word-break: break-word !important;
+    }
+
+    header p {
+      font-size: 0.8rem !important;
+      line-height: 1.35 !important;
+      max-width: 480px !important;
+      margin: 0 auto !important;
+    }
+
+    /* Smooth Swipeable Navigation Bar (Anti-Overlap) */
+    .nav-tabs {
+      display: flex !important;
+      background: #ffffff !important;
+      border-bottom: 2px solid #e2e8f0 !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 99 !important;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      white-space: nowrap !important;
+      scrollbar-width: none !important;
+      width: 100% !important;
+    }
+    .nav-tabs::-webkit-scrollbar {
+      display: none !important;
+    }
+
+    .nav-tab {
+      flex: 0 0 auto !important;
+      padding: 0.75rem 1rem !important;
+      font-size: 0.84rem !important;
+      font-weight: 700 !important;
+      color: #64748b !important;
+      cursor: pointer !important;
+      border-bottom: 3px solid transparent !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 0.4rem !important;
+      user-select: none !important;
+      transition: all 0.2s !important;
+    }
+    .nav-tab.active {
+      color: var(--primary) !important;
+      border-bottom-color: var(--primary) !important;
+      background: #f0fdf4 !important;
+    }
+
+    /* Container & Card Anti-Bleed */
+    .container {
+      width: 100% !important;
+      max-width: 900px !important;
+      margin: 0.75rem auto !important;
+      padding: 0 0.65rem !important;
+      overflow-x: hidden !important;
+    }
+
+    .card {
+      background: #ffffff !important;
+      border-radius: 12px !important;
+      padding: 1rem !important;
+      margin-bottom: 1rem !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04) !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+    }
+
+    /* Card Header Responsive Layout */
+    .card-header {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 0.35rem !important;
+      margin-bottom: 0.85rem !important;
+      border-bottom: 1px solid #f1f5f9 !important;
+      padding-bottom: 0.6rem !important;
+    }
+    @media (min-width: 641px) {
+      .card-header {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+      }
+    }
+
+    .card-title {
+      font-size: 1rem !important;
+      font-weight: 800 !important;
+      color: var(--primary-dark) !important;
+      line-height: 1.35 !important;
+    }
+
+    /* Button Groups & Grade Filters */
+    .btn-group {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 0.35rem !important;
+      width: 100% !important;
+    }
+
+    .filter-btn {
+      padding: 0.45rem 0.75rem !important;
+      font-size: 0.8rem !important;
+      font-weight: 600 !important;
+      border-radius: 6px !important;
+      border: 1px solid #cbd5e1 !important;
+      background: #f8fafc !important;
+      color: #334155 !important;
+      cursor: pointer !important;
+      line-height: 1.25 !important;
+      text-align: center !important;
+      transition: all 0.15s !important;
+    }
+    .filter-btn.active {
+      background: var(--primary) !important;
+      color: #ffffff !important;
+      border-color: var(--primary) !important;
+    }
+
+    /* Table Container & Scroll Guide */
+    .table-responsive {
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      margin: 0.75rem 0 !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 8px !important;
+      background: #ffffff !important;
+    }
+    .table-responsive::-webkit-scrollbar {
+      height: 6px !important;
+    }
+    .table-responsive::-webkit-scrollbar-thumb {
+      background: #cbd5e1 !important;
+      border-radius: 3px !important;
+    }
+
+    .data-table {
+      width: 100% !important;
+      min-width: 640px !important;
+      border-collapse: collapse !important;
+      font-size: 0.82rem !important;
+    }
+    .data-table th, .data-table td {
+      padding: 0.55rem 0.65rem !important;
+    }
+
+    /* Tashrif Chains & Arabic Word Spacing */
+    .tashrif-chain {
+      background: #f8fafc !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 8px !important;
+      padding: 0.65rem 0.85rem !important;
+      margin: 0.4rem 0 !important;
+      line-height: 2.3 !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+    }
+
+    /* Compare Grid: 1 Column on Mobile */
+    .compare-grid {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 0.5rem !important;
+      background: #f8fafc !important;
+      padding: 0.5rem 0.65rem !important;
+      border-radius: 6px !important;
+      margin: 0.4rem 0 !important;
+    }
+    @media (min-width: 641px) {
+      .compare-grid {
+        grid-template-columns: 1fr 1fr !important;
+      }
+    }
+
+    /* Mode Grid in Quiz: 2 Columns on Mobile */
+    .mode-grid {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 0.45rem !important;
+      margin-bottom: 0.85rem !important;
+      width: 100% !important;
+    }
+    @media (min-width: 641px) {
+      .mode-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+      }
+    }
+    .mode-card {
+      padding: 0.6rem 0.35rem !important;
+      border-radius: 8px !important;
+      text-align: center !important;
+      border: 1px solid #cbd5e1 !important;
+      background: #ffffff !important;
+      cursor: pointer !important;
+    }
+    .mode-card.active {
+      border-color: var(--primary) !important;
+      background: #ecfdf5 !important;
+      font-weight: 700 !important;
+    }
+    .mode-icon {
+      font-size: 1.25rem !important;
+      margin-bottom: 0.15rem !important;
+    }
+    .mode-name {
+      font-size: 0.75rem !important;
+      line-height: 1.25 !important;
+      color: #1e293b !important;
+    }
+
+    /* Flashcard Clean Hide/Show */
+    .flashcard {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 10px !important;
+      padding: 0.85rem !important;
+      cursor: pointer !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+      margin-bottom: 0.65rem !important;
+    }
+    .flashcard-answer {
+      display: none !important;
+      margin-top: 0.5rem !important;
+      padding: 0.65rem !important;
+      background: #f0fdf4 !important;
+      border: 1px dashed #86efac !important;
+      border-radius: 6px !important;
+      animation: fadeIn 0.2s ease-in !important;
+    }
+    .flashcard-answer.revealed {
+      display: block !important;
+    }
+
+    /* Quiz Card on Mobile */
+    .quiz-card {
+      padding: 1rem !important;
+      border-radius: 12px !important;
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04) !important;
+    }
+    .question-arabic {
+      font-size: 1.45rem !important;
+      line-height: 2.2 !important;
+      margin: 0.5rem 0 !important;
+      padding: 0.4rem !important;
+      background: #f8fafc !important;
+      border-radius: 8px !important;
+      border: 1px solid #e2e8f0 !important;
+      text-align: center !important;
+    }
+    .option-btn {
+      width: 100% !important;
+      text-align: left !important;
+      padding: 0.65rem 0.85rem !important;
+      font-size: 0.85rem !important;
+      border-radius: 8px !important;
+      border: 1px solid #cbd5e1 !important;
+      background: #f8fafc !important;
+      cursor: pointer !important;
+      line-height: 1.35 !important;
+      margin-bottom: 0.35rem !important;
+    }
+
+    /* Responsive Accordion */
+    details.bina-accordion {
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 8px !important;
+      padding: 0.45rem 0.65rem !important;
+      margin-top: 0.5rem !important;
+      background: #ffffff !important;
+    }
+    details.bina-accordion summary {
+      cursor: pointer !important;
+      font-weight: 700 !important;
+      font-size: 0.82rem !important;
+      color: var(--primary-dark) !important;
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      gap: 0.4rem !important;
+    }
+
   </style>
 </head>
 <body>
@@ -825,7 +1155,7 @@
         </div>
       </div>
 
-      <div class="mode-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+      <div class="mode-grid">
         <div class="mode-card active" onclick="setQuizMode('bina', this)">
           <div class="mode-icon">🏛️</div>
           <div class="mode-name">Kls 7: Bina' & Mujarrad</div>
