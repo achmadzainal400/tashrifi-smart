@@ -1,30 +1,65 @@
-const CACHE_NAME = 'smart-tashrifiy-v4';
-const ASSETS = [
+const CACHE_NAME = 'smart-tashrifiy-v20-student-analysis';
+const APP_SHELL = [
   './',
   './index.html',
   './manifest.json',
   './icon-192.png',
-  './icon-512.png'
+  './icon-512.png',
+  './student-account.css?v=16',
+  './student-account.js?v=18',
+  './supabase-config.js',
+  './monitor-guru/',
+  './monitor-guru/index.html',
+  './monitor-guru/monitor.css?v=13',
+  './monitor-guru/monitor.js?v=13'
 ];
 
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(APP_SHELL))
+      .then(() => self.skipWaiting())
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys => Promise.all(
-      keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
-    ))
+      keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+    )).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', event => {
+  const request = event.request;
+  if (request.method !== 'GET') return;
+
+  const requestUrl = new URL(request.url);
+  if (requestUrl.origin !== self.location.origin) return;
+
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request).then(response => {
+        if (response.ok) {
+          const copy = response.clone();
+          return caches.open(CACHE_NAME).then(cache => cache.put(request, copy)).then(() => response);
+        }
+        return response;
+      }).catch(() => caches.match(request).then(cached => cached || caches.match('./index.html')))
+    );
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request).then(response => response || fetch(event.request))
+    caches.match(request).then(cached => {
+      if (cached) return cached;
+      return fetch(request).then(response => {
+        if (response.ok) {
+          const copy = response.clone();
+          return caches.open(CACHE_NAME).then(cache => cache.put(request, copy)).then(() => response);
+        }
+        return response;
+      });
+    })
   );
 });
