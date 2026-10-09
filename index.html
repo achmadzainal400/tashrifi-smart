@@ -1118,7 +1118,7 @@
     .audio-btn,
     .option-btn,
     .btn-next,
-    #btn-install-app,
+    #btn-download-apk,
     details.bina-accordion summary,
     .flashcard-toggle {
       min-height: 44px;
@@ -1390,6 +1390,117 @@
       }
     }
 
+    .connection-status {
+      max-width: 900px;
+      margin: 0.55rem auto 0;
+      padding: 0.55rem 0.8rem;
+      border-radius: 8px;
+      background: #fffbeb;
+      border: 1px solid #fcd34d;
+      color: #78350f;
+      font-size: 0.82rem;
+    }
+
+    .explorer-search,
+    .learning-progress,
+    .teacher-tools {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .explorer-search label,
+    .teacher-tools label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.35rem;
+    }
+
+    .search-input,
+    .teacher-tools input[type="text"],
+    .teacher-tools select,
+    .teacher-tools textarea {
+      width: 100%;
+      min-height: 44px;
+      padding: 0.6rem 0.7rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      background: #fff;
+      color: var(--text-main);
+      font: inherit;
+    }
+
+    .teacher-tools textarea { min-height: 92px; resize: vertical; }
+    .search-help,
+    .teacher-help { margin-top: 0.35rem; font-size: 0.76rem; color: var(--text-muted); }
+    .search-results { display: grid; gap: 0.45rem; margin-top: 0.65rem; }
+    .search-result {
+      display: block;
+      width: 100%;
+      min-height: 44px;
+      padding: 0.55rem 0.7rem;
+      text-align: left;
+      border: 1px solid #dbe5df;
+      border-radius: 7px;
+      background: #f8fcf9;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+    .search-result strong { display: block; color: var(--primary-dark); }
+    .search-result span { display: block; margin-top: 0.15rem; font-size: 0.78rem; color: var(--text-muted); }
+    .search-hit { outline: 3px solid var(--accent-light) !important; outline-offset: 2px; }
+
+    .progress-heading,
+    .teacher-tools-heading {
+      color: var(--primary-dark);
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+    .progress-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.55rem; margin: 0.75rem 0; }
+    .progress-stat { padding: 0.6rem; border-radius: 7px; background: #f0fdf4; text-align: center; }
+    .progress-stat strong { display: block; color: var(--primary-dark); font-size: 1.1rem; }
+    .progress-stat span { font-size: 0.74rem; color: var(--text-muted); }
+    .progress-history { display: grid; gap: 0.3rem; margin: 0.6rem 0; padding-left: 1.1rem; font-size: 0.8rem; color: var(--text-muted); }
+    .progress-actions,
+    .teacher-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 0.7rem; }
+    .action-button {
+      min-height: 44px;
+      padding: 0.55rem 0.8rem;
+      border: 1px solid var(--primary);
+      border-radius: 7px;
+      background: var(--primary);
+      color: #fff;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .action-button.secondary { background: #fff; color: var(--primary-dark); }
+    .action-button:disabled { opacity: 0.55; cursor: not-allowed; }
+    .teacher-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.65rem; margin-top: 0.7rem; }
+    .teacher-field { min-width: 0; }
+    .teacher-field.full { grid-column: 1 / -1; }
+    .teacher-checkbox { display: flex !important; align-items: center; gap: 0.55rem; font-weight: 600 !important; color: var(--text-main) !important; }
+    .teacher-checkbox input { width: 20px; height: 20px; accent-color: var(--primary); }
+    .teacher-note-list { display: grid; gap: 0.5rem; margin-top: 0.75rem; }
+    .teacher-note { padding: 0.65rem; border-left: 3px solid var(--accent); background: #fffbeb; border-radius: 0 7px 7px 0; font-size: 0.8rem; }
+    .teacher-note p { margin-top: 0.25rem; color: var(--text-muted); overflow-wrap: anywhere; }
+    .feedback-link { margin-top: 0.55rem; min-height: 44px; padding: 0.45rem 0.65rem; border: 1px solid #a7f3d0; border-radius: 6px; background: #fff; color: #065f46; font: inherit; font-weight: 700; cursor: pointer; }
+
+    @media (max-width: 760px) {
+      .connection-status { margin-inline: 0.65rem; }
+      .teacher-grid { grid-template-columns: minmax(0, 1fr); }
+      .teacher-field.full { grid-column: auto; }
+      .progress-summary { gap: 0.35rem; }
+      .progress-stat { padding: 0.5rem 0.25rem; }
+      .progress-stat span { font-size: 0.68rem; }
+      .progress-actions > button,
+      .teacher-actions > button { flex: 1 1 100%; }
+    }
+
   </style>
 </head>
 <body>
@@ -1405,12 +1516,15 @@
     </div>
   
     <div style="margin-top: 0.5rem;">
-      <button id="btn-install-app" onclick="installPWA()" style="background:#f59e0b; color:#1e293b; border:none; padding:0.35rem 0.85rem; border-radius:9999px; font-size:0.78rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:0.35rem; box-shadow: 0 2px 4px rgba(0,0,0,0.18);">
+      <a id="btn-download-apk" href="#download-apk" onclick="downloadAndroidApp(event)" style="background:#f59e0b; color:#1e293b; text-decoration:none; border:none; padding:0.55rem 0.95rem; border-radius:9999px; font-size:0.82rem; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:0.4rem; box-shadow: 0 2px 4px rgba(0,0,0,0.18);">
         <span>📲</span>
-        <span>Pasang Aplikasi (Install App)</span>
-      </button>
+        <span>Download APK</span>
+      </a>
+      <p id="apk-download-hint" style="margin:0.4rem 0 0; font-size:0.72rem; opacity:0.9;">Tautan unduhan akan aktif setelah file APK diunggah ke Supabase.</p>
     </div>
   </header>
+
+  <div id="connection-status" class="connection-status" role="status" aria-live="polite" hidden></div>
 
   <div class="nav-tabs" role="tablist" aria-label="Navigasi utama" onkeydown="handleMainTabKeydown(event)">
     <button type="button" role="tab" aria-label="Tashrif Explorer" aria-selected="true" aria-controls="tab-explorer" tabindex="0" class="nav-tab active" id="tab-btn-explorer" onclick="switchMainTab('explorer', this)">
@@ -1443,6 +1557,13 @@
           <button class="filter-btn" onclick="filterGrade('8', this)">Kelas VIII: Mazid, Ruba'i & Faidah</button>
           <button class="filter-btn" onclick="filterGrade('9', this)">Kelas IX: 19 Kaidah I'lal & Dhomir</button>
         </div>
+      </div>
+
+      <div class="explorer-search" role="search">
+        <label for="content-search">Cari akar kata, wazan, bina', atau kaidah</label>
+        <input id="content-search" class="search-input" type="search" inputmode="search" autocomplete="off" placeholder="Contoh: وعد, فعل, Ajwaf, atau I'lal 12" oninput="searchExplorer()">
+        <div class="search-help">Harakat Arab diabaikan. Pilih kelas di atas untuk membatasi hasil.</div>
+        <div id="content-search-results" class="search-results" role="status" aria-live="polite" hidden></div>
       </div>
 
       <div id="content-display"></div>
@@ -1532,6 +1653,7 @@
         <div class="quiz-feedback" id="quiz-feedback-box">
           <div id="feedback-title" style="font-weight: 700; margin-bottom: 0.2rem;"></div>
           <div id="feedback-desc"></div>
+          <button type="button" class="feedback-link" id="feedback-material-link" hidden>Buka materi terkait</button>
         </div>
         <div style="display:flex; justify-content:space-between; align-items:center;">
           <span style="font-size:0.8rem; color:var(--text-muted);" id="quiz-hint-text">Pilih satu jawaban yang paling tepat.</span>
@@ -1547,6 +1669,24 @@
         <p style="font-size:0.92rem; color:var(--text-main); margin-bottom:1.5rem; line-height:1.5;" id="result-evaluation"></p>
         <button class="btn-next" onclick="restartQuiz()">Ulangi Kuis 🔄</button>
       </div>
+
+      <section class="learning-progress" aria-labelledby="learning-progress-title">
+        <h3 class="progress-heading" id="learning-progress-title">Progres Belajar di Perangkat Ini</h3>
+        <p class="teacher-help">Skor dan soal yang perlu diulang disimpan lokal di perangkat ini. Tidak perlu akun.</p>
+        <div class="progress-summary">
+          <div class="progress-stat"><strong id="progress-session-count">0</strong><span>Sesi selesai</span></div>
+          <div class="progress-stat"><strong id="progress-best-score">—</strong><span>Skor terbaik</span></div>
+          <div class="progress-stat"><strong id="progress-missed-count">0</strong><span>Soal tersimpan</span></div>
+        </div>
+        <p id="progress-review-summary" class="teacher-help" aria-live="polite"></p>
+        <p id="progress-empty-state" class="teacher-help">Selesaikan satu sesi latihan untuk mulai melihat progres.</p>
+        <ol id="progress-history" class="progress-history" hidden></ol>
+        <div class="progress-actions">
+          <button type="button" class="action-button" id="retry-missed-button" onclick="retryMissedQuestions()" disabled>Latih soal keliru (0)</button>
+          <button type="button" class="action-button secondary" onclick="clearLearningProgress()">Hapus progres perangkat</button>
+        </div>
+        <p id="progress-storage-status" class="teacher-help" aria-live="polite"></p>
+      </section>
     </div>
 
     <!-- TAB 4: ABOUT & PANDUAN -->
@@ -1586,6 +1726,60 @@
           </ol>
         </div>
       </div>
+
+      <section class="teacher-tools" aria-labelledby="teacher-tools-title">
+        <h3 class="teacher-tools-heading" id="teacher-tools-title">Perangkat Guru: Lembar Latihan & Telaah Materi</h3>
+        <p class="teacher-help">Pilih topik untuk membuat lembar siap cetak atau disalin untuk dibagikan. Catatan rujukan dan telaah hanya tersimpan di perangkat ini.</p>
+        <div class="teacher-grid">
+          <div class="teacher-field">
+            <label for="teacher-grade">Kelas</label>
+            <select id="teacher-grade" onchange="updateTeacherTopics()">
+              <option value="7">Kelas VII</option>
+              <option value="8">Kelas VIII</option>
+              <option value="9">Kelas IX</option>
+            </select>
+          </div>
+          <div class="teacher-field">
+            <label for="teacher-topic">Topik latihan / telaah</label>
+            <select id="teacher-topic" onchange="loadReviewDraft()"></select>
+          </div>
+          <div class="teacher-field">
+            <label for="worksheet-count">Jumlah soal</label>
+            <select id="worksheet-count">
+              <option value="5">5 soal</option>
+              <option value="10" selected>10 soal atau sesuai tersedia</option>
+              <option value="all">Semua soal topik</option>
+            </select>
+          </div>
+          <div class="teacher-field">
+            <label class="teacher-checkbox" for="worksheet-answer-key"><input id="worksheet-answer-key" type="checkbox"> Sertakan kunci jawaban saat mencetak</label>
+          </div>
+          <div class="teacher-field full teacher-actions">
+            <button type="button" class="action-button" onclick="printWorksheet()">Cetak / Simpan PDF</button>
+            <button type="button" class="action-button secondary" onclick="copyWorksheet()">Salin soal untuk dibagikan</button>
+          </div>
+          <div class="teacher-field full">
+            <p id="teacher-tool-status" class="teacher-help" role="status" aria-live="polite"></p>
+          </div>
+          <div class="teacher-field full">
+            <label for="review-reference">Rujukan (judul kitab, bab, atau halaman)</label>
+            <input id="review-reference" type="text" maxlength="180" placeholder="Contoh: Qawa'idul I'lal, kaidah 12">
+          </div>
+          <div class="teacher-field full">
+            <label for="review-note">Catatan guru / variasi contoh</label>
+            <textarea id="review-note" maxlength="800" placeholder="Catat koreksi atau perbedaan contoh yang perlu diperiksa."></textarea>
+          </div>
+          <div class="teacher-field full">
+            <label class="teacher-checkbox" for="review-verified"><input id="review-verified" type="checkbox"> Materi ini sudah diperiksa bersama guru dan rujukan</label>
+          </div>
+          <div class="teacher-field full teacher-actions">
+            <button type="button" class="action-button secondary" onclick="saveReviewNote()">Simpan catatan telaah</button>
+          </div>
+          <div class="teacher-field full">
+            <div id="teacher-review-list" class="teacher-note-list" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
     </div>
 
   </div>
@@ -2791,6 +2985,8 @@ const appData = {
         `;
         display.appendChild(sec9);
       }
+
+      searchExplorer();
     }
 
 
@@ -2844,6 +3040,357 @@ const appData = {
       document.querySelectorAll('#grade-filters .filter-btn').forEach(btn => btn.classList.remove('active'));
       if (btnElement) btnElement.classList.add('active');
       renderContent(grade);
+    }
+
+    let searchMatches = [];
+
+    function normalizeSearchText(value) {
+      return String(value || '')
+        .toLocaleLowerCase('id')
+        .normalize('NFD')
+        .replace(/[\u064B-\u065F\u0670\u0640]/g, '')
+        .replace(/[\u0300-\u036F]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function searchExplorer() {
+      const input = document.getElementById('content-search');
+      const results = document.getElementById('content-search-results');
+      if (!input || !results) return;
+
+      const query = normalizeSearchText(input.value);
+      results.replaceChildren();
+      searchMatches = [];
+      if (!query) {
+        results.hidden = true;
+        return;
+      }
+
+      const candidates = [...document.querySelectorAll(
+        '#content-display .bina-card, #content-display .data-table tbody tr, #content-display .faidah-container, #content-display .faidah-compare-box, #content-display .ilal-card'
+      )];
+      searchMatches = candidates.filter(item => normalizeSearchText(item.innerText || item.textContent).includes(query))
+        .filter(item => {
+          if (!item.matches('.faidah-container')) return true;
+          return ![...item.querySelectorAll('.faidah-compare-box')]
+            .some(child => normalizeSearchText(child.innerText || child.textContent).includes(query));
+        });
+
+      results.hidden = false;
+      if (!searchMatches.length) {
+        const empty = document.createElement('p');
+        empty.className = 'teacher-help';
+        empty.textContent = 'Belum ada materi yang cocok. Coba akar kata tanpa harakat atau pilih kelas lain.';
+        results.appendChild(empty);
+        return;
+      }
+
+      const count = document.createElement('p');
+      count.className = 'teacher-help';
+      count.textContent = `${searchMatches.length} hasil ditemukan.`;
+      results.appendChild(count);
+
+      searchMatches.slice(0, 8).forEach((item, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'search-result';
+        button.addEventListener('click', () => jumpToSearchMatch(index));
+
+        const title = document.createElement('strong');
+        title.textContent = getSearchTitle(item);
+        const snippet = document.createElement('span');
+        const context = item.closest('.card')?.querySelector('.card-title')?.textContent || '';
+        const excerpt = (item.innerText || item.textContent || '').replace(/\s+/g, ' ').trim();
+        snippet.textContent = `${context ? `${context} • ` : ''}${excerpt.slice(0, 150)}${excerpt.length > 150 ? '…' : ''}`;
+        button.append(title, snippet);
+        results.appendChild(button);
+      });
+    }
+
+    function getSearchTitle(item) {
+      if (item.matches('tr')) return item.cells?.[1]?.innerText?.trim() || 'Baris tabel';
+      return item.querySelector('.bina-title, .ilal-rule, .faidah-name, .bina-pill')?.innerText?.trim()
+        || item.closest('.faidah-container')?.querySelector('.bina-pill')?.innerText?.trim()
+        || 'Materi shorof';
+    }
+
+    function jumpToSearchMatch(index) {
+      const target = searchMatches[index];
+      if (!target) return;
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      target.classList.add('search-hit');
+      window.setTimeout(() => target.classList.remove('search-hit'), 1800);
+    }
+
+    function getQuestionGrade(question) {
+      const badge = String(question?.badge || '');
+      if (/Kelas VII/i.test(badge)) return '7';
+      if (/Kelas VIII/i.test(badge)) return '8';
+      if (/Kelas IX|I'lal|I’lal|Bedah/i.test(badge)) return '9';
+      if (/Mazid|Faidah|Ruba/i.test(badge)) return '8';
+      if (/Bina|Mujarrad|Bab [1-6]|Ajwaf|Mitsal|Naqish/i.test(badge)) return '7';
+      if (currentMode === 'bina' || currentMode === 'sambung') return '7';
+      if (currentMode === 'faidah') return '8';
+      if (currentMode === 'ilal' || currentMode === 'bedah_ilal') return '9';
+      return null;
+    }
+
+    function openRelatedMaterial(grade = null) {
+      switchMainTab('explorer', null, false);
+      const targetGrade = grade || 'all';
+      const gradeButton = [...document.querySelectorAll('#grade-filters .filter-btn')]
+        .find(button => button.getAttribute('onclick')?.includes(`'${targetGrade}'`));
+      filterGrade(targetGrade, gradeButton);
+      const search = document.getElementById('content-search');
+      if (search) search.value = '';
+      searchExplorer();
+      document.getElementById('content-display')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    const WORKSHEET_TOPICS = {
+      '7': [
+        { id: 'bina', label: "7 Macam Bina'", mode: 'bina' },
+        { id: 'mujarrad', label: 'Tashrif Tsulatsi Mujarrad', mode: 'sambung' }
+      ],
+      '8': [
+        { id: 'faidah', label: 'Faidah Wazan Mazid', mode: 'faidah' },
+        { id: 'mazid-chain', label: 'Sambung Tashrif Mazid', mode: 'sambung' }
+      ],
+      '9': [
+        { id: 'ilal', label: "19 Kaidah I'lal & Dhomir", mode: 'ilal' },
+        { id: 'bedah-ilal', label: 'Bedah Bentuk Asal I’lal', mode: 'bedah_ilal' }
+      ]
+    };
+    const REVIEW_NOTES_KEY = 'smart-tashrifiy-teacher-review-v1';
+
+    function getSelectedWorksheetTopic() {
+      const grade = document.getElementById('teacher-grade')?.value || '7';
+      const topicId = document.getElementById('teacher-topic')?.value;
+      return { grade, ...(WORKSHEET_TOPICS[grade] || []).find(topic => topic.id === topicId) };
+    }
+
+    function updateTeacherTopics() {
+      const grade = document.getElementById('teacher-grade')?.value || '7';
+      const select = document.getElementById('teacher-topic');
+      if (!select) return;
+      const topics = WORKSHEET_TOPICS[grade] || [];
+      select.replaceChildren(...topics.map(topic => new Option(topic.label, topic.id)));
+      loadReviewDraft();
+      renderTeacherReviewNotes();
+    }
+
+    function getWorksheetQuestions() {
+      const topic = getSelectedWorksheetTopic();
+      if (!topic?.mode) return [];
+      let questionsForTopic = [...(quizDataset[topic.mode] || [])];
+      if (topic.id === 'mujarrad') {
+        questionsForTopic = questionsForTopic.filter(question => /Bab [1-6]|Ajwaf|Mitsal|Naqish/.test(question.badge || ''));
+      } else if (topic.id === 'mazid-chain') {
+        questionsForTopic = questionsForTopic.filter(question => /Mazid/.test(question.badge || ''));
+      }
+      const requestedCount = document.getElementById('worksheet-count')?.value || '10';
+      if (requestedCount !== 'all') questionsForTopic = questionsForTopic.slice(0, Number(requestedCount));
+      return questionsForTopic;
+    }
+
+    function worksheetPlainText(includeKey = false) {
+      const topic = getSelectedWorksheetTopic();
+      const gradeLabel = topic.grade === '7' ? 'VII' : topic.grade === '8' ? 'VIII' : 'IX';
+      const questionsForTopic = getWorksheetQuestions();
+      const lines = [
+        'SMART TASHRIFIY • LEMBAR LATIHAN',
+        `Kelas ${gradeLabel} • ${topic.label}`,
+        'Nama: ______________________________    Tanggal: _______________',
+        ''
+      ];
+
+      questionsForTopic.forEach((question, index) => {
+        lines.push(`${index + 1}. ${question.prompt}`);
+        lines.push(question.arabic || '');
+        question.options.forEach((option, optionIndex) => lines.push(`   ${String.fromCharCode(65 + optionIndex)}. ${option}`));
+        lines.push('');
+      });
+
+      if (includeKey) {
+        lines.push('KUNCI JAWABAN');
+        questionsForTopic.forEach((question, index) => lines.push(`${index + 1}. ${String.fromCharCode(65 + question.correct)}. ${question.options[question.correct]}`));
+      }
+      return { topic, gradeLabel, questions: questionsForTopic, text: lines.join('\n') };
+    }
+
+    function escapeWorksheetHTML(value) {
+      return String(value || '').replace(/[&<>"']/g, character => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[character]);
+    }
+
+    function printWorksheet() {
+      const includeKey = document.getElementById('worksheet-answer-key')?.checked || false;
+      const worksheet = worksheetPlainText(includeKey);
+      const status = document.getElementById('teacher-tool-status');
+      if (!worksheet.questions.length) {
+        status.textContent = 'Belum ada soal yang tersedia untuk topik ini.';
+        return;
+      }
+
+      const printWindow = window.open('', '_blank');
+      if (!printWindow) {
+        status.textContent = 'Jendela cetak diblokir. Izinkan pop-up untuk situs ini lalu coba lagi.';
+        return;
+      }
+
+      const questionsHTML = worksheet.questions.map((question, index) => `
+        <article class="question">
+          <p><strong>${index + 1}.</strong> ${escapeWorksheetHTML(question.prompt)}</p>
+          <p class="arabic">${escapeWorksheetHTML(question.arabic)}</p>
+          <ol type="A">${question.options.map(option => `<li>${escapeWorksheetHTML(option)}</li>`).join('')}</ol>
+        </article>
+      `).join('');
+      const answerKeyHTML = includeKey ? `
+        <section class="answer-key"><h2>Kunci Jawaban</h2><ol>
+          ${worksheet.questions.map(question => `<li>${escapeWorksheetHTML(question.options[question.correct])}</li>`).join('')}
+        </ol></section>` : '';
+
+      printWindow.document.open();
+      printWindow.document.write(`<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>Lembar Latihan SMART TASHRIFIY</title>
+        <style>
+          @page { size: A4; margin: 16mm; }
+          body { color: #17211c; font: 12pt/1.5 Arial, sans-serif; }
+          h1 { color: #064e3b; font-size: 19pt; margin: 0; }
+          .meta { color: #475569; margin: 0.25rem 0 1.2rem; }
+          .identity { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 2px solid #d97706; padding-bottom: 0.7rem; }
+          .fields { margin: 1rem 0; }
+          .question { break-inside: avoid; padding: 0.45rem 0; border-bottom: 1px solid #d9e2dd; }
+          .arabic { direction: rtl; text-align: right; font: 20pt/1.7 "Noto Naskh Arabic", "Traditional Arabic", serif; }
+          ol { margin: 0.2rem 0 0.45rem 1.4rem; padding: 0; }
+          .answer-key { break-before: page; color: #064e3b; }
+        </style></head><body>
+        <header class="identity"><div><h1>SMART TASHRIFIY</h1><div class="meta">Lembar Latihan • Kelas ${worksheet.gradeLabel} • ${escapeWorksheetHTML(worksheet.topic.label)}</div></div><div>MTs Plus Darul Falah</div></header>
+        <p class="fields">Nama: ____________________________________ &nbsp;&nbsp; Tanggal: __________________</p>
+        ${questionsHTML}${answerKeyHTML}</body></html>`);
+      printWindow.document.close();
+      printWindow.focus();
+      window.setTimeout(() => printWindow.print(), 250);
+      status.textContent = 'Lembar latihan siap dicetak atau disimpan sebagai PDF.';
+    }
+
+    async function copyWorksheet() {
+      const worksheet = worksheetPlainText(false);
+      const status = document.getElementById('teacher-tool-status');
+      if (!worksheet.questions.length) {
+        status.textContent = 'Belum ada soal yang tersedia untuk topik ini.';
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(worksheet.text);
+        status.textContent = 'Soal disalin. Sekarang Anda dapat membagikannya kepada siswa.';
+      } catch (error) {
+        const temporary = document.createElement('textarea');
+        temporary.value = worksheet.text;
+        temporary.setAttribute('readonly', '');
+        temporary.style.position = 'fixed';
+        temporary.style.opacity = '0';
+        document.body.appendChild(temporary);
+        temporary.select();
+        const copied = document.execCommand('copy');
+        temporary.remove();
+        status.textContent = copied ? 'Soal disalin. Sekarang Anda dapat membagikannya kepada siswa.' : 'Penyalinan gagal. Coba gunakan tombol cetak atau simpan PDF.';
+      }
+    }
+
+    function readTeacherReviewNotes() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(REVIEW_NOTES_KEY) || '{}');
+        return saved && typeof saved === 'object' ? saved : {};
+      } catch (error) {
+        return {};
+      }
+    }
+
+    function currentReviewKey(topic = getSelectedWorksheetTopic()) {
+      return `${topic.grade}:${topic.id}`;
+    }
+
+    function loadReviewDraft() {
+      const topic = getSelectedWorksheetTopic();
+      if (!topic?.id) return;
+      const draft = readTeacherReviewNotes()[currentReviewKey(topic)];
+      document.getElementById('review-reference').value = draft?.reference || '';
+      document.getElementById('review-note').value = draft?.note || '';
+      document.getElementById('review-verified').checked = Boolean(draft?.verified);
+    }
+
+    function saveReviewNote() {
+      const topic = getSelectedWorksheetTopic();
+      const reference = document.getElementById('review-reference').value.trim();
+      const note = document.getElementById('review-note').value.trim();
+      const status = document.getElementById('teacher-tool-status');
+      if (!reference && !note) {
+        status.textContent = 'Isi rujukan atau catatan sebelum menyimpan telaah.';
+        return;
+      }
+      const verified = document.getElementById('review-verified').checked;
+      if (verified && !reference) {
+        status.textContent = 'Tambahkan rujukan sebelum menandai materi sudah diverifikasi.';
+        return;
+      }
+
+      const notes = readTeacherReviewNotes();
+      notes[currentReviewKey(topic)] = {
+        grade: topic.grade,
+        topicId: topic.id,
+        title: topic.label,
+        reference,
+        note,
+        verified,
+        updatedAt: new Date().toISOString()
+      };
+      try {
+        localStorage.setItem(REVIEW_NOTES_KEY, JSON.stringify(notes));
+        status.textContent = 'Catatan telaah tersimpan di perangkat ini.';
+        renderTeacherReviewNotes();
+      } catch (error) {
+        status.textContent = 'Catatan tidak dapat disimpan. Periksa ruang penyimpanan browser.';
+      }
+    }
+
+    function renderTeacherReviewNotes() {
+      const list = document.getElementById('teacher-review-list');
+      if (!list) return;
+      list.replaceChildren();
+      const entries = Object.entries(readTeacherReviewNotes())
+        .sort((a, b) => new Date(b[1].updatedAt || 0) - new Date(a[1].updatedAt || 0));
+      if (!entries.length) {
+        const empty = document.createElement('p');
+        empty.className = 'teacher-help';
+        empty.textContent = 'Belum ada catatan telaah di perangkat ini.';
+        list.appendChild(empty);
+        return;
+      }
+
+      entries.slice(0, 5).forEach(([key, entry]) => {
+        const card = document.createElement('article');
+        card.className = 'teacher-note';
+        const title = document.createElement('strong');
+        title.textContent = `Kelas ${entry.grade === '7' ? 'VII' : entry.grade === '8' ? 'VIII' : 'IX'} • ${entry.title}${entry.verified ? ' • Ditelaah' : ' • Belum ditandai ditelaah'}`;
+        const reference = document.createElement('p');
+        reference.textContent = entry.reference ? `Rujukan: ${entry.reference}` : 'Rujukan belum dicatat.';
+        const note = document.createElement('p');
+        note.textContent = entry.note || 'Tidak ada catatan tambahan.';
+        const loadButton = document.createElement('button');
+        loadButton.type = 'button';
+        loadButton.className = 'filter-btn';
+        loadButton.textContent = 'Muat catatan';
+        loadButton.addEventListener('click', () => {
+          document.getElementById('teacher-grade').value = entry.grade;
+          updateTeacherTopics();
+          document.getElementById('teacher-topic').value = entry.topicId;
+          loadReviewDraft();
+        });
+        card.append(title, reference, note, loadButton);
+        list.appendChild(card);
+      });
     }
 
 
@@ -2964,6 +3511,171 @@ const appData = {
     let score = 0;
     let streak = 0;
     let answered = false;
+    let sessionRecorded = false;
+    const LEARNING_PROGRESS_KEY = 'smart-tashrifiy-learning-progress-v1';
+
+    function readLearningProgress() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(LEARNING_PROGRESS_KEY) || '{}');
+        return {
+          sessions: Array.isArray(saved.sessions) ? saved.sessions : [],
+          missed: saved.missed && typeof saved.missed === 'object' ? saved.missed : {}
+        };
+      } catch (error) {
+        return { sessions: [], missed: {} };
+      }
+    }
+
+    function writeLearningProgress(progress) {
+      try {
+        localStorage.setItem(LEARNING_PROGRESS_KEY, JSON.stringify(progress));
+        const status = document.getElementById('progress-storage-status');
+        if (status) status.textContent = 'Skor dan jadwal muroja’ah tersimpan di perangkat ini.';
+        return true;
+      } catch (error) {
+        const status = document.getElementById('progress-storage-status');
+        if (status) status.textContent = 'Penyimpanan perangkat tidak tersedia. Progres hanya berlaku selama halaman terbuka.';
+        return false;
+      }
+    }
+
+    function quizModeLabel(mode) {
+      const labels = {
+        bina: "Kelas VII • Bina' & Mujarrad",
+        faidah: 'Kelas VIII • Faidah Mazid',
+        ilal: "Kelas IX • I'lal & Dhomir",
+        sambung: 'Rantai Tashrif',
+        detektor: 'Detektor Shighah',
+        bedah_ilal: 'Bedah Bentuk Ashal I’lal',
+        tryout: 'Try Out Akbar',
+        wrong_review: 'Muroja’ah soal keliru'
+      };
+      return labels[mode] || mode;
+    }
+
+    function updateProgressPanel() {
+      const panel = document.getElementById('progress-history');
+      if (!panel) return;
+      const progress = readLearningProgress();
+      const sessions = progress.sessions;
+      const missed = Object.values(progress.missed);
+      const best = sessions.reduce((highest, session) => session.percent > (highest?.percent ?? -1) ? session : highest, null);
+
+      document.getElementById('progress-session-count').textContent = sessions.length;
+      document.getElementById('progress-best-score').textContent = best ? `${best.percent}%` : '—';
+      document.getElementById('progress-missed-count').textContent = missed.length;
+      const dueCount = missed.filter(entry => (entry.dueAt || 0) <= Date.now()).length;
+      const reviewSummary = document.getElementById('progress-review-summary');
+      if (reviewSummary) {
+        reviewSummary.textContent = missed.length
+          ? `${dueCount} soal siap diulang sekarang dari ${missed.length} soal tersimpan. Jadwal pengulangan membantu mengingat materi bertahap.`
+          : 'Soal yang keliru akan muncul di sini dengan jadwal pengulangan bertahap.';
+      }
+      document.getElementById('progress-empty-state').hidden = sessions.length > 0;
+      document.getElementById('retry-missed-button').disabled = missed.length === 0;
+      document.getElementById('retry-missed-button').textContent = `Latih soal keliru (${missed.length})`;
+      panel.replaceChildren();
+      panel.hidden = sessions.length === 0;
+
+      sessions.slice(0, 5).forEach(session => {
+        const item = document.createElement('li');
+        const date = new Date(session.completedAt);
+        const dateText = Number.isNaN(date.getTime()) ? '' : new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium' }).format(date);
+        item.textContent = `${quizModeLabel(session.mode)} • ${session.score}/${session.maxScore} (${session.percent}%)${dateText ? ` • ${dateText}` : ''}`;
+        panel.appendChild(item);
+      });
+
+      const status = document.getElementById('progress-storage-status');
+      if (status && !status.textContent) status.textContent = 'Data latihan hanya disimpan di perangkat ini.';
+    }
+
+    function saveQuestionOutcome(question, isCorrect) {
+      if (!question?.progressId) return;
+      const progress = readLearningProgress();
+      const previous = progress.missed[question.progressId];
+      const now = Date.now();
+
+      if (isCorrect) {
+        if (previous) {
+          const successes = (previous.successes || 0) + 1;
+          if (successes >= 3) {
+            delete progress.missed[question.progressId];
+          } else {
+            const daysUntilReview = successes === 1 ? 1 : 3;
+            progress.missed[question.progressId] = {
+              ...previous,
+              successes,
+              dueAt: now + daysUntilReview * 24 * 60 * 60 * 1000
+            };
+          }
+        }
+      } else {
+        const misses = (previous?.misses || 0) + 1;
+        const delayMinutes = misses === 1 ? 10 : misses === 2 ? 60 : 1440;
+        progress.missed[question.progressId] = {
+          question: { ...question, options: [...question.options] },
+          misses,
+          successes: 0,
+          dueAt: now + delayMinutes * 60 * 1000
+        };
+      }
+
+      writeLearningProgress(progress);
+      updateProgressPanel();
+    }
+
+    function saveCompletedSession() {
+      if (sessionRecorded || questions.length === 0) return;
+      sessionRecorded = true;
+      const progress = readLearningProgress();
+      const maxScore = questions.length * 25;
+      progress.sessions.unshift({
+        mode: currentMode,
+        score,
+        maxScore,
+        percent: Math.round((score / maxScore) * 100),
+        completedAt: new Date().toISOString()
+      });
+      progress.sessions = progress.sessions.slice(0, 30);
+      writeLearningProgress(progress);
+      updateProgressPanel();
+    }
+
+    function retryMissedQuestions() {
+      const progress = readLearningProgress();
+      const savedQuestions = Object.values(progress.missed)
+        .sort((a, b) => (a.dueAt || 0) - (b.dueAt || 0))
+        .map(entry => entry.question)
+        .filter(Boolean);
+      if (!savedQuestions.length) {
+        updateProgressPanel();
+        return;
+      }
+      if (questions.length && !sessionRecorded && (qIdx > 0 || answered)) {
+        const continueReview = confirm('Kuis yang sedang berjalan belum selesai. Mulai muroja’ah dan tinggalkan kuis ini?');
+        if (!continueReview) return;
+      }
+
+      currentMode = 'wrong_review';
+      document.querySelectorAll('.mode-card').forEach(card => {
+        card.classList.remove('active');
+        card.setAttribute('aria-pressed', 'false');
+      });
+      restartQuiz(savedQuestions);
+    }
+
+    function clearLearningProgress() {
+      if (!window.confirm('Hapus riwayat skor dan daftar soal keliru dari perangkat ini?')) return;
+      try {
+        localStorage.removeItem(LEARNING_PROGRESS_KEY);
+        const status = document.getElementById('progress-storage-status');
+        if (status) status.textContent = 'Progres pada perangkat ini sudah dihapus.';
+      } catch (error) {
+        const status = document.getElementById('progress-storage-status');
+        if (status) status.textContent = 'Progres tidak dapat dihapus dari penyimpanan perangkat.';
+      }
+      updateProgressPanel();
+    }
 
     // Fisher-Yates Shuffle
     function shuffleArray(arr) {
@@ -2988,17 +3700,27 @@ const appData = {
       restartQuiz();
     }
 
-    function restartQuiz() {
+    function restartQuiz(reviewQuestions = null) {
       let rawQuestions = [];
-      if (currentMode === 'tryout') {
+      if (reviewQuestions) {
+        rawQuestions = reviewQuestions;
+      } else if (currentMode === 'wrong_review') {
+        rawQuestions = Object.values(readLearningProgress().missed).map(entry => entry.question).filter(Boolean);
+      } else if (currentMode === 'tryout') {
         const categories = ['bina', 'faidah', 'ilal', 'sambung', 'detektor', 'bedah_ilal'];
         let pool = [];
         categories.forEach(cat => {
-          if (quizDataset[cat]) pool.push(...shuffleArray(quizDataset[cat]).slice(0, 4));
+          if (quizDataset[cat]) {
+            const tagged = quizDataset[cat].map((question, index) => ({ ...question, progressId: `${cat}-${index}` }));
+            pool.push(...shuffleArray(tagged).slice(0, 4));
+          }
         });
         rawQuestions = shuffleArray(pool).slice(0, 20); // 20 questions tryout
       } else {
-        rawQuestions = quizDataset[currentMode] || [];
+        rawQuestions = (quizDataset[currentMode] || []).map((question, index) => ({
+          ...question,
+          progressId: question.progressId || `${currentMode}-${index}`
+        }));
       }
 
       questions = shuffleArray(rawQuestions).map(q => {
@@ -3015,11 +3737,19 @@ const appData = {
       score = 0;
       streak = 0;
       answered = false;
+      sessionRecorded = false;
       document.getElementById('current-score').innerText = score;
       document.getElementById('current-streak').innerText = streak + ' 🔥';
       document.getElementById('quiz-result-box').style.display = 'none';
-      document.getElementById('quiz-card-box').style.display = 'block';
-      loadQ();
+      document.getElementById('quiz-card-box').style.display = questions.length ? 'block' : 'none';
+      if (questions.length) {
+        loadQ();
+      } else {
+        document.getElementById('quiz-result-box').style.display = 'block';
+        document.getElementById('final-score-display').textContent = '0 / 0';
+        document.getElementById('result-evaluation').textContent = 'Belum ada soal keliru yang tersimpan. Selesaikan latihan terlebih dahulu.';
+      }
+      updateProgressPanel();
     }
 
     function loadQ() {
@@ -3034,6 +3764,7 @@ const appData = {
       fb.className = 'quiz-feedback';
       fb.style.display = 'none';
       document.getElementById('quiz-next-btn').classList.add('hidden');
+      document.getElementById('feedback-material-link').hidden = true;
 
       const container = document.getElementById('quiz-options-container');
       container.innerHTML = '';
@@ -3075,6 +3806,14 @@ const appData = {
         fbd.innerText = q.explanation;
       }
 
+      const isCorrect = i === q.correct;
+      saveQuestionOutcome(q, isCorrect);
+      const materialLink = document.getElementById('feedback-material-link');
+      const grade = getQuestionGrade(q);
+      materialLink.textContent = grade ? `Buka materi Kelas ${grade === '7' ? 'VII' : grade === '8' ? 'VIII' : 'IX'}` : 'Buka semua materi terkait';
+      materialLink.onclick = () => openRelatedMaterial(grade);
+      materialLink.hidden = false;
+
       document.getElementById('current-score').innerText = score;
       document.getElementById('current-streak').innerText = streak + ' 🔥';
       document.getElementById('quiz-next-btn').classList.remove('hidden');
@@ -3087,6 +3826,7 @@ const appData = {
     }
 
     function showResult() {
+      saveCompletedSession();
       document.getElementById('quiz-card-box').style.display = 'none';
       const rbox = document.getElementById('quiz-result-box');
       rbox.style.display = 'block';
@@ -3095,7 +3835,12 @@ const appData = {
       const evalP = document.getElementById('result-evaluation');
       const pct = (score / maxScore) * 100;
 
-      if (currentMode === 'tryout') {
+      if (currentMode === 'wrong_review') {
+        const remaining = Object.keys(readLearningProgress().missed).length;
+        evalP.innerText = remaining
+          ? `Latihan ulang selesai. ${remaining} soal masih tersimpan untuk muroja’ah berikutnya.`
+          : 'Bagus, semua soal keliru sudah terjawab benar tiga kali. Materi ini selesai dimuroja’ah.';
+      } else if (currentMode === 'tryout') {
         if (pct >= 90) {
           evalP.innerHTML = "<div style='color:#059669; font-size:1.15rem; font-weight:700;'>🏆 MUMTAZ (مُمْتَازٌ) - Predikat Istimewa!</div><p style='margin-top:0.3rem;'>Masya Allah! Penguasaan materi shorof Anda dari Kelas VII s.d. IX sangat sempurna dan layak menjadi teladan santri MTs Plus Darul Falah.</p>";
         } else if (pct >= 80) {
@@ -3112,36 +3857,51 @@ const appData = {
       }
     }
 
-    // PWA Installation
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      const installBtn = document.getElementById('btn-install-app');
-      if (installBtn) installBtn.style.display = 'inline-flex';
-    });
+    // Ganti dengan URL publik file APK dari Supabase Storage setelah file diunggah.
+    const APK_DOWNLOAD_URL = 'https://kzridyfnsuhdcypawoax.supabase.co/storage/v1/object/public/SmartTashrify/SmartTashrify.apk';
 
-    function installPWA() {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(() => {
-          deferredPrompt = null;
-        });
-      } else {
-        alert("Untuk memasang aplikasi di HP:\nBuka menu peramban (titik tiga di Chrome atau ikon Bagikan di Safari), lalu pilih 'Tambahkan ke Layar Utama' (Add to Home screen) atau 'Instal Aplikasi'.");
+    function downloadAndroidApp(event) {
+      if (!APK_DOWNLOAD_URL.trim()) {
+        event.preventDefault();
+        alert('File APK belum tersedia. Setelah diunggah ke Supabase, masukkan URL publiknya pada APK_DOWNLOAD_URL di index.html.');
+        return;
       }
+      event.preventDefault();
+      window.location.href = APK_DOWNLOAD_URL.trim();
     }
+
+    function updateConnectionStatus() {
+      const status = document.getElementById('connection-status');
+      if (!status) return;
+      status.hidden = navigator.onLine;
+      status.textContent = navigator.onLine
+        ? ''
+        : 'Mode offline aktif. Materi yang tersimpan dan progres di perangkat ini tetap bisa digunakan.';
+    }
+
+    window.addEventListener('online', updateConnectionStatus);
+    window.addEventListener('offline', updateConnectionStatus);
 
     // Service Worker Registration
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW failed', err));
+        navigator.serviceWorker.register('./sw.js').catch(() => {
+          const status = document.getElementById('connection-status');
+          if (status && navigator.onLine) {
+            status.hidden = false;
+            status.textContent = 'Penyimpanan offline belum siap. Buka kembali situs saat tersambung ke internet.';
+          }
+        });
       });
     }
 
     window.addEventListener('DOMContentLoaded', () => {
       renderContent('all');
       renderMurojaah('shighah');
+      updateTeacherTopics();
+      renderTeacherReviewNotes();
+      updateProgressPanel();
+      updateConnectionStatus();
       restartQuiz();
     });
 
